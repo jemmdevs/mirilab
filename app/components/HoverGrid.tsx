@@ -75,7 +75,7 @@ export default function HoverGrid() {
             // Check if we are showing or hiding the content
             if (isShowing) {
                 // Make the content element visible and position it above others
-                gsap.set(contentElement, { zIndex: 1 });
+                gsap.set(contentElement, { zIndex: 1, opacity: 1 });
                 contentElement.classList.add('content--current');
 
                 // Create and play the animation for showing content
@@ -115,6 +115,7 @@ export default function HoverGrid() {
                     }
                 })
                     .set(bgElement, { opacity: 0 }, 0.05)
+                    .to(contentElement, { opacity: 0, duration: 0.5 }, 0.45)
                     .to(contentTitle, { opacity: 0 }, 0)
                     .to(contentImages, { clipPath: (index, target) => getClipPath(target)['from'] }, 0)
                     .to(contentInnerImages, { scale: 1.5 }, 0);
