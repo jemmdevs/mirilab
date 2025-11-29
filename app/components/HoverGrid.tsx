@@ -106,7 +106,7 @@ export default function HoverGrid() {
                 // Create and play the animation for hiding content
                 targetWithTl.tlLeave = gsap.timeline({
                     defaults: {
-                        duration: 0.95,
+                        duration: 0.7,
                         ease: 'power4'
                     },
                     onComplete: () => {
@@ -115,7 +115,7 @@ export default function HoverGrid() {
                     }
                 })
                     .set(bgElement, { opacity: 0 }, 0.05)
-                    .to(contentElement, { opacity: 0, duration: 0.5 }, 0.45)
+                    .to(contentElement, { opacity: 0, duration: 0.35 }, 0.35)
                     .to(contentTitle, { opacity: 0 }, 0)
                     .to(contentImages, { clipPath: (index, target) => getClipPath(target)['from'] }, 0)
                     .to(contentInnerImages, { scale: 1.5 }, 0);
