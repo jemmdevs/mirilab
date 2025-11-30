@@ -184,10 +184,7 @@ export default function HoverGrid() {
         <div className="hover-grid-container" ref={containerRef}>
             <main>
                 <div className="frame">
-                    <div className="frame__title">
-                        <h1><a href="https://tympanus.net/codrops/demos/?tag=hover">#Hover</a> <a href="https://tympanus.net/codrops/demos/?tag=grid">#Grid</a> Animations</h1>
-                        <span>Want animations like these? <a href="mailto:contact@codrops.com">Hire us</a></span>
-                    </div>
+
                     <nav className="frame__works">
                         <span>Recent works</span>
                         <a href="#content-1">Herex Aether</a>
@@ -196,16 +193,7 @@ export default function HoverGrid() {
                         <a href="#content-4">Metamorph</a>
                         <a href="#content-5">Prismatica</a>
                     </nav>
-                    <div className="frame__tagline">Blending artistry with technology, we transform visionary ideas into tangible, captivating realities that inspire and connect.</div>
-                    <div className="frame__site">Grafixo</div>
-                    <div className="frame__year">2024</div>
-                    <div className="frame__contact"><a>Get in touch &nearr;</a></div>
-                    <div className="frame__menu"></div>
-                    <div className="frame__links">
-                        <a className="frame__back" href="https://tympanus.net/codrops/?p=76613">Article</a>
-                        <a className="frame__archive" href="https://tympanus.net/codrops/demos/">All demos</a>
-                        <a className="frame__github" href="https://github.com/codrops/HoverGrid/">GitHub</a>
-                    </div>
+
                     <h2 className="frame__title-main"><span>Studio</span> <span>Grafixo</span></h2>
                     <div className="frame__content">
                         <div className="content" id="content-1" data-bg="bg-1">

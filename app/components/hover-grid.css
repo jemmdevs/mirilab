@@ -5,7 +5,7 @@
 }
 
 :root {
-	font-size: 12.5px;
+	font-size: 16px;
 	--color-text: #777674;
 	--color-bg: #000;
 	--color-link: #777674;
@@ -20,7 +20,7 @@
 .hover-grid-container {
 	color: var(--color-text);
 	background-color: var(--color-bg);
-	font-family: "Onest", sans-serif;
+	font-family: "Inter", sans-serif;
   font-optical-sizing: auto;
 	text-transform: uppercase;
 	-webkit-font-smoothing: antialiased;
@@ -160,6 +160,9 @@
 
 .frame__site {
 	grid-area: site;
+	font-size: 16px;
+	font-weight: 400;
+	line-height: normal;
 }
 
 .frame__year {
@@ -205,13 +208,19 @@
 .frame__menu {
 	grid-area: menu;
 	justify-self: end;
-	width: 30px;
-	aspect-ratio: 1;
+	width: auto;
+	min-width: 30px;
+	aspect-ratio: auto;
 	position: relative;
 	display: flex;
 	flex-direction: column;
-	align-items: self-end;
+	align-items: flex-end;
 	gap: 0.5rem;
+	font-size: 12px;
+	font-weight: 350;
+	line-height: 21px;
+	overflow: hidden;
+	transition: all 0.3s ease;
 }
 
 .frame__menu::before {
@@ -226,6 +235,21 @@
 	width: 60%;
 	height: 1px;
 	background: currentColor;
+}
+
+.frame__menu-text {
+	opacity: 0;
+	white-space: nowrap;
+	transition: opacity 0.3s ease;
+	pointer-events: none;
+}
+
+.frame__menu:hover {
+	width: auto;
+}
+
+.frame__menu:hover .frame__menu-text {
+	opacity: 1;
 }
 
 .frame__links {
