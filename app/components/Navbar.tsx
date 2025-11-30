@@ -46,14 +46,33 @@ export default function Navbar() {
     }, []);
 
     return (
-        <nav className="fixed top-0 left-0 w-full flex justify-between items-center px-8 py-6 z-[2000] text-white pointer-events-none" style={{ fontFamily: 'Inter, sans-serif' }}>
+        <nav className="fixed top-0 left-0 w-full flex justify-between items-center px-8 py-4 z-[2000] text-white pointer-events-none" style={{ fontFamily: 'Inter, sans-serif' }}>
             {/* Left: Menu Button */}
-            <button className="pointer-events-auto bg-white/10 backdrop-blur-md border border-white/10 px-6 py-2 rounded-full hover:bg-white/20 transition-all duration-300" style={{ fontSize: '12px', fontWeight: 350, lineHeight: '21px' }}>
-                Menu
+            <button
+                className="pointer-events-auto relative w-[64px] h-[26px] rounded-full bg-white/10 border border-white/10 hover:border-white overflow-hidden flex items-center justify-center group transition-colors duration-300"
+                style={{ backdropFilter: 'blur(1.4rem)' }}
+                aria-label="Open the main navigation menu"
+            >
+                <span
+                    className="absolute flex items-center justify-center transition-transform duration-300 group-hover:-translate-y-[150%]"
+                    style={{ fontSize: '12px', fontWeight: 350, lineHeight: '21px' }}
+                >
+                    Menu
+                </span>
+                <span
+                    className="absolute flex items-center justify-center gap-1 transition-transform duration-300 translate-y-[150%] group-hover:translate-y-0"
+                    style={{ fontSize: '12px', fontWeight: 350, lineHeight: '21px' }}
+                >
+                    <span>Close</span>
+                    <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" width="10" height="10">
+                        <path d="M2.625 2.625L9.375 9.375" stroke="currentColor" strokeWidth="1.5" />
+                        <path d="M2.625 9.375L9.375 2.625" stroke="currentColor" strokeWidth="1.5" />
+                    </svg>
+                </span>
             </button>
 
             {/* Center: App Name */}
-            <div className="absolute left-1/2 -translate-x-1/2 tracking-tight pointer-events-auto mix-blend-difference" style={{ fontSize: '16px', fontWeight: 400, lineHeight: 'normal' }}>
+            <div className="absolute left-1/2 -translate-x-1/2 tracking-tight pointer-events-auto mix-blend-difference" style={{ fontSize: '24px', fontWeight: 400, lineHeight: 'normal' }}>
                 Mirilab
             </div>
 
@@ -70,31 +89,24 @@ export default function Navbar() {
                 {/* Get in Touch Button */}
                 <a
                     href="mailto:contact@mirilab.com"
-                    className="group relative flex items-center justify-center bg-white/10 backdrop-blur-md border border-white/20 rounded-full h-10 w-[40px] hover:w-[130px] transition-all duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] overflow-hidden"
+                    className="group relative flex items-center justify-center bg-white/10 backdrop-blur-md border border-white/20 hover:border-white rounded-full h-[26px] w-[32px] hover:w-[115px] transition-all duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] overflow-hidden"
                 >
-                    {/* Icon State */}
-                    <div className="absolute inset-0 flex items-center justify-center transition-all duration-300 group-hover:opacity-0 group-hover:scale-50">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="18"
-                            height="18"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                        >
-                            <rect width="20" height="16" x="2" y="4" rx="2" />
-                            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
-                        </svg>
-                    </div>
-
-                    {/* Text State */}
-                    <div className="absolute inset-0 flex items-center justify-center opacity-0 scale-90 group-hover:opacity-100 group-hover:scale-100 transition-all duration-300 delay-75">
-                        <span className="text-xs font-medium whitespace-nowrap">
+                    <div className="flex items-center justify-center">
+                        <span className="text-xs font-medium whitespace-nowrap opacity-0 max-w-0 group-hover:opacity-100 group-hover:max-w-[100px] transition-all duration-700 ease-[cubic-bezier(0.76,0,0.24,1)]">
                             Get in touch
                         </span>
+                        <div className="w-0 group-hover:w-2 transition-all duration-500 ease-[cubic-bezier(0.76,0,0.24,1)]" />
+                        <svg
+                            viewBox="0 0 10 8"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="12"
+                            height="12"
+                            className="flex-shrink-0"
+                        >
+                            <rect x="0.5" y="1" width="9" height="6" rx="0.5" stroke="currentColor" />
+                            <path d="M0.5 1.5L4.4453 4.1302C4.7812 4.35413 5.2188 4.35413 5.5547 4.1302L9.5 1.5" stroke="currentColor" />
+                        </svg>
                     </div>
                 </a>
             </div>
