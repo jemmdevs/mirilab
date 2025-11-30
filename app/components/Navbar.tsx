@@ -91,24 +91,22 @@ export default function Navbar() {
                 {/* Get in Touch Button */}
                 <a
                     href="mailto:contact@mirilab.com"
-                    className="group relative flex items-center bg-white/10 backdrop-blur-md border border-white/20 hover:border-white rounded-full h-[26px] w-[32px] hover:w-[115px] transition-all duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] overflow-hidden"
+                    className="group relative flex items-center bg-white/10 backdrop-blur-md border border-white/20 hover:border-white rounded-full h-[26px] w-[26px] hover:w-[115px] transition-all duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] overflow-hidden"
                 >
                     {/* Text Container */}
-                    <div className="absolute inset-0 pr-[32px] pl-2 flex items-center justify-end opacity-0 group-hover:opacity-100 transition-opacity duration-150 group-hover:duration-700 ease-[cubic-bezier(0.76,0,0.24,1)]">
+                    <div className="absolute inset-0 pr-[26px] pl-2 flex items-center justify-end opacity-0 group-hover:opacity-100 transition-opacity duration-150 group-hover:duration-700 ease-[cubic-bezier(0.76,0,0.24,1)]">
                         <span className="text-xs font-medium whitespace-nowrap pr-1">
                             Get in touch
                         </span>
                     </div>
 
                     {/* Icon Container */}
-                    <div className="absolute right-0 top-0 h-full w-[32px] flex items-center justify-center">
+                    <div className="absolute inset-0 flex items-center justify-center group-hover:justify-end group-hover:pr-[7px]">
                         <svg
                             viewBox="0 0 10 8"
                             fill="none"
                             xmlns="http://www.w3.org/2000/svg"
-                            width="12"
-                            height="12"
-                            className="flex-shrink-0"
+                            className="w-3 h-3 flex-shrink-0"
                         >
                             <rect x="0.5" y="1" width="9" height="6" rx="0.5" stroke="currentColor" />
                             <path d="M0.5 1.5L4.4453 4.1302C4.7812 4.35413 5.2188 4.35413 5.5547 4.1302L9.5 1.5" stroke="currentColor" />
