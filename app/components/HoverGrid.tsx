@@ -42,7 +42,7 @@ export default function HoverGrid() {
             return clipPath;
         };
 
-        // Utility function to toggle the display of work based on mouse events
+        // Utility function to toggle the display of works based on mouse events
         const toggleWork = (event: MouseEvent, isShowing: boolean) => {
             const target = event.target as HTMLAnchorElement;
             const href = target.getAttribute('href');
@@ -121,6 +121,7 @@ export default function HoverGrid() {
                     .to(contentInnerImages, { scale: 1.5 }, 0);
             }
         };
+
 
         const showWork = (event: MouseEvent) => toggleWork(event, true);
         const hideWork = (event: MouseEvent) => toggleWork(event, false);
