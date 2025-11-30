@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { AnimatePresence, motion } from 'motion/react';
 
 const cities = [
     { name: 'NYC', timezone: 'America/New_York' },
@@ -10,12 +11,11 @@ const cities = [
 
 export default function Navbar() {
     const [currentCityIndex, setCurrentCityIndex] = useState(0);
-    const [time, setTime] = useState('');
-    const [isVisible, setIsVisible] = useState(true);
+    const [currentTime, setCurrentTime] = useState('');
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+    // Update time every second
     useEffect(() => {
-        // Update time every second
         const updateTime = () => {
             const city = cities[currentCityIndex];
             const now = new Date();
@@ -25,7 +25,7 @@ export default function Navbar() {
                 hour12: true,
                 timeZone: city.timezone,
             }).format(now);
-            setTime(`${city.name} ${formattedTime}`);
+            setCurrentTime(formattedTime);
         };
 
         updateTime();
@@ -33,14 +33,10 @@ export default function Navbar() {
         return () => clearInterval(interval);
     }, [currentCityIndex]);
 
+    // Rotate city every 4 seconds
     useEffect(() => {
-        // Rotate city every 3 seconds
         const rotateInterval = setInterval(() => {
-            setIsVisible(false);
-            setTimeout(() => {
-                setCurrentCityIndex((prev) => (prev + 1) % cities.length);
-                setIsVisible(true);
-            }, 500); // Wait for fade out
+            setCurrentCityIndex((prev) => (prev + 1) % cities.length);
         }, 4000);
 
         return () => clearInterval(rotateInterval);
@@ -80,12 +76,42 @@ export default function Navbar() {
 
             {/* Right: Time & Contact */}
             <div className="flex items-center gap-6 pointer-events-auto">
-                {/* Rotating Time */}
-                <div
-                    className={`text-sm font-medium transition-opacity duration-500 min-w-[100px] text-right ${isVisible ? 'opacity-100' : 'opacity-0'
-                        }`}
+                {/* Rotating City & Time */}
+                <div 
+                    className="flex items-center gap-1.5 min-w-[115px] justify-end"
+                    style={{ fontSize: '12px', fontWeight: 350, lineHeight: '14px' }}
                 >
-                    {time}
+                    {/* City */}
+                    <div className="relative overflow-hidden h-[14px]">
+                        <AnimatePresence mode="wait">
+                            <motion.span
+                                key={cities[currentCityIndex].name}
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -10 }}
+                                transition={{ duration: 0.3, ease: [0.76, 0, 0.24, 1], delay: 0.08 }}
+                                className="block"
+                            >
+                                {cities[currentCityIndex].name}
+                            </motion.span>
+                        </AnimatePresence>
+                    </div>
+                    
+                    {/* Time */}
+                    <div className="relative overflow-hidden h-[14px]">
+                        <AnimatePresence mode="wait">
+                            <motion.span
+                                key={`${currentCityIndex}-${currentTime}`}
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -10 }}
+                                transition={{ duration: 0.3, ease: [0.76, 0, 0.24, 1] }}
+                                className="block"
+                            >
+                                {currentTime}
+                            </motion.span>
+                        </AnimatePresence>
+                    </div>
                 </div>
 
                 {/* Get in Touch Button */}
@@ -94,7 +120,7 @@ export default function Navbar() {
                     className="group relative flex items-center bg-white/10 backdrop-blur-md border border-white/20 hover:border-white rounded-full h-[26px] w-[26px] hover:w-[115px] transition-all duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] overflow-hidden"
                 >
                     {/* Text Container */}
-                    <div className="absolute inset-0 pr-[26px] pl-2 flex items-center justify-end opacity-0 group-hover:opacity-100 transition-opacity duration-150 group-hover:duration-700 ease-[cubic-bezier(0.76,0,0.24,1)]">
+                    <div className="absolute inset-0 pr-[26px] pl-2 flex items-center justify-end opacity-0 group-hover:opacity-100 transition-opacity duration-300 group-hover:duration-500 ease-[cubic-bezier(0.76,0,0.24,1)]">
                         <span className="text-xs font-medium whitespace-nowrap pr-1">
                             Get in touch
                         </span>
