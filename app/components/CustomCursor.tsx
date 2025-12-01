@@ -81,7 +81,7 @@ export default function CustomCursor() {
                 <circle
                     cx="20"
                     cy="20"
-                    r={isHovering ? 3 : 5}
+                    r={isHovering ? 1 : 6}
                     fill="white"
                     className="transition-all duration-300 ease-out origin-center"
                     style={{ mixBlendMode: 'difference' }}
