@@ -116,7 +116,12 @@
   * {
     @apply border-border outline-ring/50;
   }
-  body {
+
+  body,
+  a,
+  button,
+  [role="button"] {
+    cursor: none !important;
     @apply bg-background text-foreground;
   }
 }
