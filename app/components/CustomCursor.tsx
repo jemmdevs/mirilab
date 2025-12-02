@@ -77,7 +77,7 @@ export default function CustomCursor() {
                     className={`transition-all duration-300 ease-out origin-center ${isHovering ? 'opacity-100 scale-100' : 'opacity-0 scale-50'}`}
                 />
 
-                {/* Dot (White, shrinks on hover, mix-blend-difference) */}
+                {/* Dot (White, shrinks on Hover, mix-blend-difference) */}
                 <circle
                     cx="20"
                     cy="20"
