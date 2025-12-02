@@ -79,35 +79,47 @@ export default function HoverGrid() {
                 gsap.set(contentElement, { zIndex: 1, opacity: 1 });
                 contentElement.classList.add('content--current');
 
-                // Create and play the animation for showing content - smoother/slower entrance
+                // Create and play the animation for showing content - ultra smooth entrance
                 targetWithTl.tlEnter = gsap.timeline({
                     defaults: {
-                        duration: 1.2,
-                        ease: 'power2.out'
+                        duration: 0.9,
+                        ease: 'expo.out' // More organic, cinematic ease
                     }
                 })
-                    // Smooth fade in for background
-                    .to(bgElement, { opacity: 1, duration: 0.6, ease: 'power2.out' }, 0)
-                    .fromTo(contentTitle, { opacity: 0, scale: 0.97, y: 20 }, { opacity: 1, scale: 1, y: 0, duration: 0.8, ease: 'power2.out' }, 0.1)
+                    // Soft background fade
+                    .to(bgElement, { opacity: 1, duration: 0.5, ease: 'sine.out' }, 0)
+                    // Title with subtle entrance
+                    .fromTo(contentTitle, 
+                        { opacity: 0, y: 12 }, 
+                        { opacity: 1, y: 0, duration: 0.7, ease: 'expo.out' }, 
+                    0.05)
+                    // Images: separate clip-path animation for smoothness
                     .fromTo(contentImages, {
-                        xPercent: () => gsap.utils.random(-4, 4),
-                        yPercent: () => gsap.utils.random(-4, 4),
-                        filter: 'brightness(140%)',
-                        opacity: 0,
-                        scale: 0.92,
-                        clipPath: (index, target) => getClipPath(target)['from']
+                        clipPath: (index, target) => getClipPath(target)['from'],
+                        opacity: 0
                     }, {
-                        xPercent: 0,
-                        yPercent: 0,
-                        filter: 'brightness(100%)',
-                        opacity: 1,
-                        scale: 1,
                         clipPath: (index, target) => getClipPath(target)['to'],
-                        stagger: 0.08,
-                        duration: 1.0,
-                        ease: 'power2.out'
-                    }, 0.15)
-                    .fromTo(contentInnerImages, { scale: 1.15 }, { scale: 1, stagger: 0.08, duration: 1.0, ease: 'power2.out' }, 0.15);
+                        opacity: 1,
+                        stagger: {
+                            each: 0.06,
+                            ease: 'power1.in'
+                        },
+                        duration: 0.75,
+                        ease: 'power3.out' // Smooth deceleration for clip reveal
+                    }, 0.08)
+                    // Inner images: subtle zoom that follows the clip reveal
+                    .fromTo(contentInnerImages, 
+                        { scale: 1.08 }, 
+                        { 
+                            scale: 1, 
+                            stagger: {
+                                each: 0.06,
+                                ease: 'power1.in'
+                            },
+                            duration: 1.1,
+                            ease: 'expo.out' // Long smooth deceleration
+                        }, 
+                    0.08);
             } else {
                 // Instant hide - no animation to prevent flash/flicker when switching between items
                 gsap.set(contentElement, { zIndex: 0, opacity: 0 });
@@ -221,7 +233,7 @@ export default function HoverGrid() {
                         <a href="#content-5">Prismatica</a>
                     </nav>
 
-                    <h2 className="frame__title-main"><span>Studio</span> <span>Grafixo</span></h2>
+                    <h2 className="frame__title-main"><span>I make</span> <span>Interfaces</span></h2>
                     <div className="frame__content">
                         <div className="content" id="content-1" data-bg="bg-1">
                             <h2 className="content__title">Herex Aether</h2>
