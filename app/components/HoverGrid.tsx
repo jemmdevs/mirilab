@@ -274,7 +274,16 @@ export default function HoverGrid() {
                 <div id="bg-3" className="background__image" style={{ backgroundImage: 'url(/media/pink.jpg)' }}></div>
                 <div id="bg-4" className="background__image" style={{ backgroundImage: 'url(/media/beige2.jpg)' }}></div>
                 <div id="bg-5" className="background__image" style={{ backgroundImage: 'url(/media/red2.jpg)' }}></div>
-                <div className="background__video" style={{ backgroundColor: 'black', zIndex: -1 }}></div>
+                <video
+                    className="background__video"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    style={{ zIndex: -1 }}
+                >
+                    <source src="/bg-video.mp4" type="video/mp4" />
+                </video>
             </div>
         </div>
     );
