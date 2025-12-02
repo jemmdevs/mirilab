@@ -79,30 +79,35 @@ export default function HoverGrid() {
                 gsap.set(contentElement, { zIndex: 1, opacity: 1 });
                 contentElement.classList.add('content--current');
 
-                // Create and play the animation for showing content
+                // Create and play the animation for showing content - smoother/slower entrance
                 targetWithTl.tlEnter = gsap.timeline({
                     defaults: {
-                        duration: 0.7,
-                        ease: 'power3.out'
+                        duration: 1.2,
+                        ease: 'power2.out'
                     }
                 })
                     // Smooth fade in for background
-                    .to(bgElement, { opacity: 1, duration: 0.45, ease: 'power2.out' }, 0)
-                    .fromTo(contentTitle, { opacity: 0, scale: 0.96 }, { opacity: 1, scale: 1, duration: 0.55 }, 0.08)
+                    .to(bgElement, { opacity: 1, duration: 0.6, ease: 'power2.out' }, 0)
+                    .fromTo(contentTitle, { opacity: 0, scale: 0.97, y: 20 }, { opacity: 1, scale: 1, y: 0, duration: 0.8, ease: 'power2.out' }, 0.1)
                     .fromTo(contentImages, {
-                        xPercent: () => gsap.utils.random(-6, 6),
-                        yPercent: () => gsap.utils.random(-6, 6),
-                        filter: 'brightness(180%)',
+                        xPercent: () => gsap.utils.random(-4, 4),
+                        yPercent: () => gsap.utils.random(-4, 4),
+                        filter: 'brightness(140%)',
+                        opacity: 0,
+                        scale: 0.92,
                         clipPath: (index, target) => getClipPath(target)['from']
                     }, {
                         xPercent: 0,
                         yPercent: 0,
                         filter: 'brightness(100%)',
+                        opacity: 1,
+                        scale: 1,
                         clipPath: (index, target) => getClipPath(target)['to'],
-                        stagger: 0.04,
-                        ease: 'power3.out'
-                    }, 0)
-                    .fromTo(contentInnerImages, { scale: 1.25 }, { scale: 1, stagger: 0.04, ease: 'power3.out' }, 0);
+                        stagger: 0.08,
+                        duration: 1.0,
+                        ease: 'power2.out'
+                    }, 0.15)
+                    .fromTo(contentInnerImages, { scale: 1.15 }, { scale: 1, stagger: 0.08, duration: 1.0, ease: 'power2.out' }, 0.15);
             } else {
                 // Instant hide - no animation to prevent flash/flicker when switching between items
                 gsap.set(contentElement, { zIndex: 0, opacity: 0 });
@@ -117,17 +122,47 @@ export default function HoverGrid() {
         const showWork = (event: MouseEvent) => toggleWork(event, true);
         const hideWork = (event: MouseEvent) => toggleWork(event, false);
 
+        // Shared state for coordinating hover transitions between links
+        let activeLink: HTMLAnchorElement | null = null;
+        let hideTimer: NodeJS.Timeout | null = null;
+        const HIDE_DELAY = 80; // ms to wait before hiding, allows smooth transition between links
+
         // Initialize hover effects
         workLinks.forEach(workLink => {
-            let hoverTimer: NodeJS.Timeout;
-
             const handleMouseEnter = (event: Event) => {
-                hoverTimer = setTimeout(() => showWork(event as MouseEvent), 30);
+                const target = event.target as HTMLAnchorElement;
+                
+                // Cancel any pending hide operation
+                if (hideTimer) {
+                    clearTimeout(hideTimer);
+                    hideTimer = null;
+                }
+                
+                // If there's a different active link, hide it immediately
+                if (activeLink && activeLink !== target) {
+                    hideWork({ target: activeLink } as unknown as MouseEvent);
+                }
+                
+                // Show the new content
+                activeLink = target;
+                showWork(event as MouseEvent);
             };
 
             const handleMouseLeave = (event: Event) => {
-                clearTimeout(hoverTimer);
-                hideWork(event as MouseEvent);
+                const target = event.target as HTMLAnchorElement;
+                
+                // Only set up hide timer if this is the active link
+                if (activeLink === target) {
+                    // Delay hiding to allow mouse to move to adjacent link
+                    hideTimer = setTimeout(() => {
+                        // Only hide if no new link became active
+                        if (activeLink === target) {
+                            hideWork(event as MouseEvent);
+                            activeLink = null;
+                        }
+                        hideTimer = null;
+                    }, HIDE_DELAY);
+                }
             };
 
             workLink.addEventListener('mouseenter', handleMouseEnter);
@@ -180,7 +215,7 @@ export default function HoverGrid() {
                     <nav className="frame__works">
                         <span>Recent works</span>
                         <a href="#content-1">Herex Aether</a>
-                        <a href="#content-2">Cosmic Silence</a>
+                        <a href="#content-2">Cosmic</a>
                         <a href="#content-3">Mystic Trails</a>
                         <a href="#content-4">Metamorph</a>
                         <a href="#content-5">Prismatica</a>
@@ -195,7 +230,7 @@ export default function HoverGrid() {
                             <div className="content__img pos-3" data-dir="top"><div className="content__img-inner" style={{ backgroundImage: 'url(/media/3.jpg)' }}></div></div>
                         </div>
                         <div className="content" id="content-2" data-bg="bg-2">
-                            <h2 className="content__title">Cosmic Silence</h2>
+                            <h2 className="content__title">Cosmic</h2>
                             <div className="content__img pos-4" data-dir="bottom"><div className="content__img-inner" style={{ backgroundImage: 'url(/media/4.jpg)' }}></div></div>
                             <div className="content__img pos-5" data-dir="right"><div className="content__img-inner" style={{ backgroundImage: 'url(/media/5.jpg)' }}></div></div>
                             <div className="content__img pos-6" data-dir="right"><div className="content__img-inner" style={{ backgroundImage: 'url(/media/6.jpg)' }}></div></div>

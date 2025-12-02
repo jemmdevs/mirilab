@@ -177,28 +177,65 @@
 	grid-area: works;
 	display: flex;
 	flex-direction: column;
-	pointer-events: none;
+	gap: 0;
+	pointer-events: auto;
+	position: fixed;
+	left: 2.5rem;
+	top: 50%;
+	transform: translateY(-50%);
+	z-index: 1500;
+	/* No container styling - each link has its own */
+	background: transparent;
+	border: none;
+	padding: 0;
 }
 
 .frame__works span {
-	margin-bottom: 1.5rem;
+	display: none;
 }
 
 .frame__works a {
 	pointer-events: auto;
-	padding: 0.25rem 0;
+	padding: 0.45rem 1rem;
+	margin: 0.25rem 0;
 	position: relative;
-	font-size: 1.5rem;
+	font-size: 12px;
+	font-weight: 350;
+	letter-spacing: 0.01em;
 	text-decoration: none;
-	color: var(--color-link-works);
+	color: rgba(255, 255, 255, 0.9);
+	text-transform: none;
+	white-space: nowrap;
+	/* Individual liquid glass container for each link */
+	background: rgba(255, 255, 255, 0.08);
+	backdrop-filter: blur(20px);
+	-webkit-backdrop-filter: blur(20px);
+	border: 1px solid rgba(255, 255, 255, 0.12);
+	border-radius: 9999px;
+	transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Extended hover area to fill gaps between buttons */
+.frame__works a::before {
+	content: '';
+	position: absolute;
+	left: -0.5rem;
+	right: -0.5rem;
+	top: -0.25rem;
+	bottom: -0.25rem;
+	pointer-events: auto;
 }
 
 .frame__works a:hover {
-	color: var(--color-link-works-hover);
+	color: #fff;
+	background: rgba(255, 255, 255, 0.03);
+	border-color: rgba(255, 255, 255, 0.85);
 }
 
 .frame__works a.current {
-	color: var(--color-link-works-current);
+	color: #fff;
+	background: rgba(255, 255, 255, 0.03);
+	border-color: rgba(255, 255, 255, 0.85);
 }
 
 .frame__sponsors {
@@ -329,6 +366,8 @@
 	will-change: clip-path, filter, transform;
 	backface-visibility: hidden;
 	transform: translateZ(0);
+	border-radius: 4px;
+	overflow: hidden;
 }
 
 .content__img-inner {
@@ -339,6 +378,7 @@
 	will-change: transform;
 	backface-visibility: hidden;
 	transform: translateZ(0);
+	border-radius: 4px;
 }
 
 .pos-1 {
@@ -460,7 +500,7 @@
 			'tagline ... site year menu'
 			'tagline content content content content'
 			'contact content content content content'
-			'works content content content content'
+			'. content content content content'
 			'title title links links links';
 	}
 
@@ -472,11 +512,17 @@
 		gap: 2rem;
 	}
 
-	.frame__works {
-		margin-bottom: 10vh;
-	}
-
 	.frame__title-main {
 		grid-area: 5 / 3 / 2 / 6;
+	}
+}
+
+/* Mobile styles for frame__works */
+@media screen and (max-width: 52.99em) {
+	.frame__works {
+		position: fixed;
+		left: 1.5rem;
+		top: 50%;
+		transform: translateY(-50%);
 	}
 }
