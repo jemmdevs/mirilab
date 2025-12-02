@@ -3,6 +3,7 @@
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import './hover-grid.css';
+import ColorBends from './ColorBends';
 
 export default function HoverGrid() {
     const containerRef = useRef<HTMLDivElement>(null);
@@ -81,44 +82,34 @@ export default function HoverGrid() {
                 // Create and play the animation for showing content
                 targetWithTl.tlEnter = gsap.timeline({
                     defaults: {
-                        duration: 0.95,
-                        ease: 'power4'
+                        duration: 0.7,
+                        ease: 'power3.out'
                     }
                 })
-                    .set(bgElement, { opacity: 1 })
-                    .fromTo(contentTitle, { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1 }, 0)
+                    // Smooth fade in for background
+                    .to(bgElement, { opacity: 1, duration: 0.45, ease: 'power2.out' }, 0)
+                    .fromTo(contentTitle, { opacity: 0, scale: 0.96 }, { opacity: 1, scale: 1, duration: 0.55 }, 0.08)
                     .fromTo(contentImages, {
-                        xPercent: () => gsap.utils.random(-10, 10),
-                        yPercent: () => gsap.utils.random(-10, 10),
-                        filter: 'brightness(300%)',
+                        xPercent: () => gsap.utils.random(-6, 6),
+                        yPercent: () => gsap.utils.random(-6, 6),
+                        filter: 'brightness(180%)',
                         clipPath: (index, target) => getClipPath(target)['from']
                     }, {
                         xPercent: 0,
                         yPercent: 0,
                         filter: 'brightness(100%)',
-                        clipPath: (index, target) => getClipPath(target)['to']
+                        clipPath: (index, target) => getClipPath(target)['to'],
+                        stagger: 0.04,
+                        ease: 'power3.out'
                     }, 0)
-                    .fromTo(contentInnerImages, { scale: 1.5 }, { scale: 1 }, 0);
+                    .fromTo(contentInnerImages, { scale: 1.25 }, { scale: 1, stagger: 0.04, ease: 'power3.out' }, 0);
             } else {
-                // Reset the z-index and prepare the content element for hiding
-                gsap.set(contentElement, { zIndex: 0 });
-
-                // Create and play the animation for hiding content
-                targetWithTl.tlLeave = gsap.timeline({
-                    defaults: {
-                        duration: 0.7,
-                        ease: 'power4'
-                    },
-                    onComplete: () => {
-                        // Remove the visibility class once the animation completes
-                        contentElement.classList.remove('content--current');
-                    }
-                })
-                    .set(bgElement, { opacity: 0 }, 0.05)
-                    .to(contentElement, { opacity: 0, duration: 0.35 }, 0.35)
-                    .to(contentTitle, { opacity: 0 }, 0)
-                    .to(contentImages, { clipPath: (index, target) => getClipPath(target)['from'] }, 0)
-                    .to(contentInnerImages, { scale: 1.5 }, 0);
+                // Instant hide - no animation to prevent flash/flicker when switching between items
+                gsap.set(contentElement, { zIndex: 0, opacity: 0 });
+                gsap.set(bgElement, { opacity: 0 });
+                gsap.set(contentTitle, { opacity: 0 });
+                gsap.set(contentImages, { clipPath: (index, target) => getClipPath(target)['from'] });
+                contentElement.classList.remove('content--current');
             }
         };
 
@@ -236,10 +227,20 @@ export default function HoverGrid() {
                 <div id="bg-3" className="background__image" style={{ backgroundImage: 'url(/media/pink.jpg)' }}></div>
                 <div id="bg-4" className="background__image" style={{ backgroundImage: 'url(/media/beige2.jpg)' }}></div>
                 <div id="bg-5" className="background__image" style={{ backgroundImage: 'url(/media/red2.jpg)' }}></div>
-                <video autoPlay muted loop className="background__video">
-                    <source src="/media/bg-video.mp4" type="video/mp4" />
-                    Your browser does not support the video tag.
-                </video>
+                <ColorBends
+                    className="background__video"
+                    colors={["#00cfff", "#0011ff"]}
+                    rotation={30}
+                    speed={0.3}
+                    scale={1.2}
+                    frequency={1.4}
+                    warpStrength={1.2}
+                    mouseInfluence={0.8}
+                    parallax={0.6}
+                    noise={0.08}
+                    brightness={2.2}
+                    contrast={0.8}
+                />
             </div>
         </div>
     );
