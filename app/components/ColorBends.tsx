@@ -17,6 +17,7 @@ type ColorBendsProps = {
   noise?: number;
   brightness?: number;
   contrast?: number;
+  offset?: [number, number]; // [x, y] - position offset for the pattern origin
 };
 
 const MAX_COLORS = 8 as const;
@@ -39,6 +40,7 @@ uniform float uParallax;
 uniform float uNoise;
 uniform float uBrightness;
 uniform float uContrast;
+uniform vec2 uOffset;
 varying vec2 vUv;
 
 void main() {
@@ -49,7 +51,7 @@ void main() {
   vec2 q = vec2(rp.x * (uCanvas.x / uCanvas.y), rp.y);
   q /= max(uScale, 0.0001);
   q /= 0.5 + 0.2 * dot(q, q);
-  q += 0.2 * cos(t) - 7.56;
+  q += 0.2 * cos(t) + uOffset;
   vec2 toward = (uPointer - rp);
   q += toward * uMouseInfluence * 0.2;
 
@@ -128,7 +130,7 @@ void main() {
 export default function ColorBends({
   className,
   style,
-  rotation = 45,
+  rotation = -25,
   speed = 0.2,
   colors = [],
   transparent = true,
@@ -140,7 +142,8 @@ export default function ColorBends({
   parallax = 0.5,
   noise = 0.1,
   brightness = 1.5,
-  contrast = 1.2
+  contrast = 1.2,
+  offset = [-7.56, -7.56] // default original position
 }: ColorBendsProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
@@ -179,7 +182,8 @@ export default function ColorBends({
         uParallax: { value: parallax },
         uNoise: { value: noise },
         uBrightness: { value: brightness },
-        uContrast: { value: contrast }
+        uContrast: { value: contrast },
+        uOffset: { value: new THREE.Vector2(offset[0], offset[1]) }
       },
       premultipliedAlpha: true,
       transparent: true
@@ -272,6 +276,7 @@ export default function ColorBends({
     material.uniforms.uNoise.value = noise;
     material.uniforms.uBrightness.value = brightness;
     material.uniforms.uContrast.value = contrast;
+    (material.uniforms.uOffset.value as THREE.Vector2).set(offset[0], offset[1]);
 
     const toVec3 = (hex: string) => {
       const h = hex.replace('#', '').trim();
@@ -305,7 +310,8 @@ export default function ColorBends({
     brightness,
     contrast,
     colors,
-    transparent
+    transparent,
+    offset
   ]);
 
   useEffect(() => {

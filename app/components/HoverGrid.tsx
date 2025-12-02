@@ -277,16 +277,17 @@ export default function HoverGrid() {
                 <ColorBends
                     className="background__video"
                     colors={["#00cfff", "#0011ff"]}
-                    rotation={30}
-                    speed={0.3}
-                    scale={1.2}
-                    frequency={1.4}
-                    warpStrength={1.2}
-                    mouseInfluence={0.8}
-                    parallax={0.6}
+                    rotation={75}
+                    speed={0.2}
+                    scale={0.19}
+                    frequency={1}
+                    warpStrength={1}
+                    mouseInfluence={0.4}
+                    parallax={0.5}
                     noise={0.08}
-                    brightness={2.2}
-                    contrast={0.8}
+                    brightness={0.5}
+                    contrast={1}
+                    offset={[0, 0]}
                 />
             </div>
         </div>
