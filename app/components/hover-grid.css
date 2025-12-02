@@ -177,8 +177,10 @@
 	grid-area: works;
 	display: flex;
 	flex-direction: column;
-	align-items: flex-start; /* Allow items to shrink to content width */
-	gap: 0.35rem; /* Small visual gap between items */
+	align-items: flex-start;
+	/* Allow items to shrink to content width */
+	gap: 0.35rem;
+	/* Small visual gap between items */
 	pointer-events: auto;
 	position: fixed;
 	left: 2.5rem;
@@ -207,7 +209,8 @@
 	color: rgba(255, 255, 255, 0.9);
 	text-transform: none;
 	white-space: nowrap;
-	width: fit-content; /* Shrink to text content */
+	width: fit-content;
+	/* Shrink to text content */
 	/* Individual liquid glass container for each link */
 	background: rgba(255, 255, 255, 0.08);
 	backdrop-filter: blur(20px);
@@ -223,8 +226,10 @@
 	position: absolute;
 	left: -0.5rem;
 	right: -0.5rem;
-	top: -0.25rem; /* Extends into the gap above */
-	bottom: -0.25rem; /* Extends into the gap below - overlaps with next item's ::before */
+	top: -0.25rem;
+	/* Extends into the gap above */
+	bottom: -0.25rem;
+	/* Extends into the gap below - overlaps with next item's ::before */
 	pointer-events: auto;
 	z-index: -1;
 }

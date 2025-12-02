@@ -3,7 +3,7 @@
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import './hover-grid.css';
-import ColorBends from './ColorBends';
+
 
 export default function HoverGrid() {
     const containerRef = useRef<HTMLDivElement>(null);
@@ -89,10 +89,10 @@ export default function HoverGrid() {
                     // Soft background fade
                     .to(bgElement, { opacity: 1, duration: 0.7, ease: 'sine.out' }, 0)
                     // Title with subtle entrance
-                    .fromTo(contentTitle, 
-                        { opacity: 0, y: 12 }, 
-                        { opacity: 1, y: 0, duration: 0.95, ease: 'expo.out' }, 
-                    0.05)
+                    .fromTo(contentTitle,
+                        { opacity: 0, y: 12 },
+                        { opacity: 1, y: 0, duration: 0.95, ease: 'expo.out' },
+                        0.05)
                     // Images: separate clip-path animation for smoothness
                     .fromTo(contentImages, {
                         clipPath: (index, target) => getClipPath(target)['from'],
@@ -108,18 +108,18 @@ export default function HoverGrid() {
                         ease: 'power3.out' // Smooth deceleration for clip reveal
                     }, 0.08)
                     // Inner images: subtle zoom that follows the clip reveal
-                    .fromTo(contentInnerImages, 
-                        { scale: 1.08 }, 
-                        { 
-                            scale: 1, 
+                    .fromTo(contentInnerImages,
+                        { scale: 1.08 },
+                        {
+                            scale: 1,
                             stagger: {
                                 each: 0.08,
                                 ease: 'power1.in'
                             },
                             duration: 1.45,
                             ease: 'expo.out' // Long smooth deceleration
-                        }, 
-                    0.08);
+                        },
+                        0.08);
             } else {
                 // Instant hide - no animation to prevent flash/flicker when switching between items
                 gsap.set(contentElement, { zIndex: 0, opacity: 0 });
@@ -143,18 +143,18 @@ export default function HoverGrid() {
         workLinks.forEach(workLink => {
             const handleMouseEnter = (event: Event) => {
                 const target = event.target as HTMLAnchorElement;
-                
+
                 // Cancel any pending hide operation
                 if (hideTimer) {
                     clearTimeout(hideTimer);
                     hideTimer = null;
                 }
-                
+
                 // If there's a different active link, hide it immediately
                 if (activeLink && activeLink !== target) {
                     hideWork({ target: activeLink } as unknown as MouseEvent);
                 }
-                
+
                 // Show the new content
                 activeLink = target;
                 showWork(event as MouseEvent);
@@ -162,7 +162,7 @@ export default function HoverGrid() {
 
             const handleMouseLeave = (event: Event) => {
                 const target = event.target as HTMLAnchorElement;
-                
+
                 // Only set up hide timer if this is the active link
                 if (activeLink === target) {
                     // Delay hiding to allow mouse to move to adjacent link
@@ -274,21 +274,7 @@ export default function HoverGrid() {
                 <div id="bg-3" className="background__image" style={{ backgroundImage: 'url(/media/pink.jpg)' }}></div>
                 <div id="bg-4" className="background__image" style={{ backgroundImage: 'url(/media/beige2.jpg)' }}></div>
                 <div id="bg-5" className="background__image" style={{ backgroundImage: 'url(/media/red2.jpg)' }}></div>
-                <ColorBends
-                    className="background__video"
-                    colors={["#00cfff", "#0011ff"]}
-                    rotation={75}
-                    speed={0.2}
-                    scale={0.19}
-                    frequency={1}
-                    warpStrength={1}
-                    mouseInfluence={0.4}
-                    parallax={0.5}
-                    noise={0.08}
-                    brightness={0.5}
-                    contrast={1}
-                    offset={[0, 0]}
-                />
+                <div className="background__video" style={{ backgroundColor: 'black', zIndex: -1 }}></div>
             </div>
         </div>
     );
