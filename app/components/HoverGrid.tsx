@@ -82,16 +82,16 @@ export default function HoverGrid() {
                 // Create and play the animation for showing content - ultra smooth entrance
                 targetWithTl.tlEnter = gsap.timeline({
                     defaults: {
-                        duration: 0.9,
+                        duration: 1.25,
                         ease: 'expo.out' // More organic, cinematic ease
                     }
                 })
                     // Soft background fade
-                    .to(bgElement, { opacity: 1, duration: 0.5, ease: 'sine.out' }, 0)
+                    .to(bgElement, { opacity: 1, duration: 0.7, ease: 'sine.out' }, 0)
                     // Title with subtle entrance
                     .fromTo(contentTitle, 
                         { opacity: 0, y: 12 }, 
-                        { opacity: 1, y: 0, duration: 0.7, ease: 'expo.out' }, 
+                        { opacity: 1, y: 0, duration: 0.95, ease: 'expo.out' }, 
                     0.05)
                     // Images: separate clip-path animation for smoothness
                     .fromTo(contentImages, {
@@ -101,10 +101,10 @@ export default function HoverGrid() {
                         clipPath: (index, target) => getClipPath(target)['to'],
                         opacity: 1,
                         stagger: {
-                            each: 0.06,
+                            each: 0.08,
                             ease: 'power1.in'
                         },
-                        duration: 0.75,
+                        duration: 1.0,
                         ease: 'power3.out' // Smooth deceleration for clip reveal
                     }, 0.08)
                     // Inner images: subtle zoom that follows the clip reveal
@@ -113,10 +113,10 @@ export default function HoverGrid() {
                         { 
                             scale: 1, 
                             stagger: {
-                                each: 0.06,
+                                each: 0.08,
                                 ease: 'power1.in'
                             },
-                            duration: 1.1,
+                            duration: 1.45,
                             ease: 'expo.out' // Long smooth deceleration
                         }, 
                     0.08);
