@@ -316,7 +316,7 @@
 .frame__title-main {
 	text-transform: none;
 	line-height: 0.9;
-	font-weight: 400;
+	font-weight: 100;
 	margin: 0;
 	grid-area: content;
 	color: var(--color-title);
@@ -485,7 +485,7 @@
 	transform: translateZ(0);
 }
 
-.background__video {
+.background__base {
 	position: relative;
 	z-index: 1;
 	grid-area: background;

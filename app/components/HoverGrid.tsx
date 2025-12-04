@@ -17,7 +17,7 @@ export default function HoverGrid() {
         const workNav = container.querySelector('.frame__works');
         const workLinks = Array.from(workNav?.querySelectorAll('a') || []);
         const title = container.querySelector('.frame__title-main');
-        const video = container.querySelector('.background__video');
+        const bgBase = container.querySelector('.background__base');
 
         if (!workNav || workLinks.length === 0) return;
 
@@ -189,8 +189,8 @@ export default function HoverGrid() {
 
         // Fades out the video/title when hovering over the navigation
         const handleNavMouseEnter = () => {
-            gsap.killTweensOf([video, title]);
-            gsap.to([video, title], {
+            gsap.killTweensOf([bgBase, title]);
+            gsap.to([bgBase, title], {
                 duration: 0.6,
                 ease: 'power4',
                 opacity: 0
@@ -198,8 +198,8 @@ export default function HoverGrid() {
         };
 
         const handleNavMouseLeave = () => {
-            gsap.killTweensOf([video, title]);
-            gsap.to([video, title], {
+            gsap.killTweensOf([bgBase, title]);
+            gsap.to([bgBase, title], {
                 duration: 0.6,
                 ease: 'sine.in',
                 opacity: 1
@@ -274,16 +274,12 @@ export default function HoverGrid() {
                 <div id="bg-3" className="background__image" style={{ backgroundImage: 'url(/media/pink.jpg)' }}></div>
                 <div id="bg-4" className="background__image" style={{ backgroundImage: 'url(/media/beige2.jpg)' }}></div>
                 <div id="bg-5" className="background__image" style={{ backgroundImage: 'url(/media/red2.jpg)' }}></div>
-                <video
-                    className="background__video"
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
+                <img
+                    className="background__base"
+                    src="/bgimg.jpg"
+                    alt="Background"
                     style={{ zIndex: -1 }}
-                >
-                    <source src="/bgvideoHD.webm" type="video/webm" />
-                </video>
+                />
             </div>
         </div>
     );
