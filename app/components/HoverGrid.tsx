@@ -227,10 +227,10 @@ export default function HoverGrid() {
                     <nav className="frame__works">
                         <span>Recent works</span>
                         <a href="#content-1">Herex Aether</a>
-                        <a href="#content-2">Cosmic</a>
+                        <a href="#content-2">Cosmics</a>
                         <a href="#content-3">Mystic Trails</a>
                         <a href="#content-4">Metamorph</a>
-                        <a href="#content-5">Prismatica</a>
+                        <a href="#content-5">Prismatics</a>
                     </nav>
 
                     <h2 className="frame__title-main"><span>I make</span> <span>Interfaces</span></h2>
@@ -242,7 +242,7 @@ export default function HoverGrid() {
                             <div className="content__img pos-3" data-dir="top"><div className="content__img-inner" style={{ backgroundImage: 'url(/media/3.jpg)' }}></div></div>
                         </div>
                         <div className="content" id="content-2" data-bg="bg-2">
-                            <h2 className="content__title">Cosmic</h2>
+                            <h2 className="content__title">Cosmics</h2>
                             <div className="content__img pos-4" data-dir="bottom"><div className="content__img-inner" style={{ backgroundImage: 'url(/media/4.jpg)' }}></div></div>
                             <div className="content__img pos-5" data-dir="right"><div className="content__img-inner" style={{ backgroundImage: 'url(/media/5.jpg)' }}></div></div>
                             <div className="content__img pos-6" data-dir="right"><div className="content__img-inner" style={{ backgroundImage: 'url(/media/6.jpg)' }}></div></div>
@@ -260,7 +260,7 @@ export default function HoverGrid() {
                             <div className="content__img pos-12" data-dir="right"><div className="content__img-inner" style={{ backgroundImage: 'url(/media/12.jpg)' }}></div></div>
                         </div>
                         <div className="content" id="content-5" data-bg="bg-5">
-                            <h2 className="content__title">Prismatica</h2>
+                            <h2 className="content__title">Prismatics</h2>
                             <div className="content__img pos-13" data-dir="right"><div className="content__img-inner" style={{ backgroundImage: 'url(/media/13.jpg)' }}></div></div>
                             <div className="content__img pos-14" data-dir="bottom"><div className="content__img-inner" style={{ backgroundImage: 'url(/media/14.jpg)' }}></div></div>
                             <div className="content__img pos-15" data-dir="right"><div className="content__img-inner" style={{ backgroundImage: 'url(/media/15.jpg)' }}></div></div>
@@ -276,7 +276,7 @@ export default function HoverGrid() {
                 <div id="bg-5" className="background__image" style={{ backgroundImage: 'url(/media/red2.jpg)' }}></div>
                 <img
                     className="background__base"
-                    src="/bgimg.jpg"
+                    src="/imgbg.jpeg"
                     alt="Background"
                     style={{ zIndex: -1 }}
                 />
