@@ -1,12 +1,115 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import './hover-grid.css';
 
+// Content data for lazy loading management
+const contentData = [
+    { id: 'content-1', bg: 'bg-1', images: ['/media/1.jpg', '/media/2.jpg', '/media/3.jpg'] },
+    { id: 'content-2', bg: 'bg-2', images: ['/media/4.jpg', '/media/5.jpg', '/media/6.jpg'] },
+    { id: 'content-3', bg: 'bg-3', images: ['/media/7.jpg', '/media/8.jpg', '/media/9.jpg'] },
+    { id: 'content-4', bg: 'bg-4', images: ['/media/10.jpg', '/media/11.jpg', '/media/12.jpg'] },
+    { id: 'content-5', bg: 'bg-5', images: ['/media/13.jpg', '/media/14.jpg', '/media/15.jpg'] },
+];
+
+const bgData = [
+    { id: 'bg-1', src: '/media/beige1.jpg' },
+    { id: 'bg-2', src: '/media/red1.jpg' },
+    { id: 'bg-3', src: '/media/pink.jpg' },
+    { id: 'bg-4', src: '/media/beige2.jpg' },
+    { id: 'bg-5', src: '/media/red2.jpg' },
+];
+
+// Lazy image component that only loads when activated
+function LazyBgImage({ 
+    id, 
+    src, 
+    isActive 
+}: { 
+    id: string; 
+    src: string; 
+    isActive: boolean;
+}) {
+    const [loaded, setLoaded] = useState(false);
+    const [shouldLoad, setShouldLoad] = useState(false);
+
+    useEffect(() => {
+        if (isActive && !shouldLoad) {
+            setShouldLoad(true);
+        }
+    }, [isActive, shouldLoad]);
+
+    useEffect(() => {
+        if (shouldLoad && !loaded) {
+            const img = new Image();
+            img.onload = () => setLoaded(true);
+            img.src = src;
+        }
+    }, [shouldLoad, src, loaded]);
+
+    return (
+        <div 
+            id={id}
+            className="background__image"
+            style={{ 
+                backgroundImage: loaded ? `url(${src})` : 'none',
+            }}
+        />
+    );
+}
+
+// Lazy content image
+function LazyContentImage({
+    src,
+    className,
+    dataDir,
+    isActive
+}: {
+    src: string;
+    className: string;
+    dataDir: string;
+    isActive: boolean;
+}) {
+    const [loaded, setLoaded] = useState(false);
+    const [shouldLoad, setShouldLoad] = useState(false);
+
+    useEffect(() => {
+        if (isActive && !shouldLoad) {
+            setShouldLoad(true);
+        }
+    }, [isActive, shouldLoad]);
+
+    useEffect(() => {
+        if (shouldLoad && !loaded) {
+            const img = new Image();
+            img.onload = () => setLoaded(true);
+            img.src = src;
+        }
+    }, [shouldLoad, src, loaded]);
+
+    return (
+        <div className={`content__img ${className}`} data-dir={dataDir}>
+            <div 
+                className="content__img-inner" 
+                style={{ backgroundImage: loaded ? `url(${src})` : 'none' }}
+            />
+        </div>
+    );
+}
 
 export default function HoverGrid() {
     const containerRef = useRef<HTMLDivElement>(null);
+    const [activeContent, setActiveContent] = useState<string | null>(null);
+    const [preloadedSections, setPreloadedSections] = useState<Set<string>>(new Set());
+
+    // Preload first section after mount for better UX
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setPreloadedSections(new Set(['content-1']));
+        }, 100);
+        return () => clearTimeout(timer);
+    }, []);
 
     useEffect(() => {
         if (!containerRef.current) return;
@@ -17,7 +120,7 @@ export default function HoverGrid() {
         const workNav = container.querySelector('.frame__works');
         const workLinks = Array.from(workNav?.querySelectorAll('a') || []);
         const title = container.querySelector('.frame__title-main');
-        const bgBase = container.querySelector('.background__base');
+        const video = container.querySelector('.background__video');
 
         if (!workNav || workLinks.length === 0) return;
 
@@ -48,6 +151,16 @@ export default function HoverGrid() {
             const target = event.target as HTMLAnchorElement;
             const href = target.getAttribute('href');
             if (!href) return;
+
+            const contentId = href.replace('#', '');
+            
+            // Update active content for lazy loading
+            if (isShowing) {
+                setActiveContent(contentId);
+                setPreloadedSections(prev => new Set([...prev, contentId]));
+            } else {
+                setActiveContent(null);
+            }
 
             // Find content within the container
             const contentElement = container.querySelector(href) as HTMLElement;
@@ -189,8 +302,8 @@ export default function HoverGrid() {
 
         // Fades out the video/title when hovering over the navigation
         const handleNavMouseEnter = () => {
-            gsap.killTweensOf([bgBase, title]);
-            gsap.to([bgBase, title], {
+            gsap.killTweensOf([video, title]);
+            gsap.to([video, title], {
                 duration: 0.6,
                 ease: 'power4',
                 opacity: 0
@@ -198,8 +311,8 @@ export default function HoverGrid() {
         };
 
         const handleNavMouseLeave = () => {
-            gsap.killTweensOf([bgBase, title]);
-            gsap.to([bgBase, title], {
+            gsap.killTweensOf([video, title]);
+            gsap.to([video, title], {
                 duration: 0.6,
                 ease: 'sine.in',
                 opacity: 1
@@ -219,11 +332,13 @@ export default function HoverGrid() {
         };
     }, []);
 
+    const isContentActive = (contentId: string) => 
+        activeContent === contentId || preloadedSections.has(contentId);
+
     return (
         <div className="hover-grid-container" ref={containerRef}>
             <main>
                 <div className="frame">
-
                     <nav className="frame__works">
                         <span>Recent works</span>
                         <a href="#content-1">Herex Aether</a>
@@ -237,48 +352,54 @@ export default function HoverGrid() {
                     <div className="frame__content">
                         <div className="content" id="content-1" data-bg="bg-1">
                             <h2 className="content__title">Herex Aether</h2>
-                            <div className="content__img pos-1" data-dir="right"><div className="content__img-inner" style={{ backgroundImage: 'url(/media/1.jpg)' }}></div></div>
-                            <div className="content__img pos-2" data-dir="left"><div className="content__img-inner" style={{ backgroundImage: 'url(/media/2.jpg)' }}></div></div>
-                            <div className="content__img pos-3" data-dir="top"><div className="content__img-inner" style={{ backgroundImage: 'url(/media/3.jpg)' }}></div></div>
+                            <LazyContentImage src="/media/1.jpg" className="pos-1" dataDir="right" isActive={isContentActive('content-1')} />
+                            <LazyContentImage src="/media/2.jpg" className="pos-2" dataDir="left" isActive={isContentActive('content-1')} />
+                            <LazyContentImage src="/media/3.jpg" className="pos-3" dataDir="top" isActive={isContentActive('content-1')} />
                         </div>
                         <div className="content" id="content-2" data-bg="bg-2">
                             <h2 className="content__title">Cosmics</h2>
-                            <div className="content__img pos-4" data-dir="bottom"><div className="content__img-inner" style={{ backgroundImage: 'url(/media/4.jpg)' }}></div></div>
-                            <div className="content__img pos-5" data-dir="right"><div className="content__img-inner" style={{ backgroundImage: 'url(/media/5.jpg)' }}></div></div>
-                            <div className="content__img pos-6" data-dir="right"><div className="content__img-inner" style={{ backgroundImage: 'url(/media/6.jpg)' }}></div></div>
+                            <LazyContentImage src="/media/4.jpg" className="pos-4" dataDir="bottom" isActive={isContentActive('content-2')} />
+                            <LazyContentImage src="/media/5.jpg" className="pos-5" dataDir="right" isActive={isContentActive('content-2')} />
+                            <LazyContentImage src="/media/6.jpg" className="pos-6" dataDir="right" isActive={isContentActive('content-2')} />
                         </div>
                         <div className="content" id="content-3" data-bg="bg-3">
                             <h2 className="content__title">Mystic Trails</h2>
-                            <div className="content__img pos-7" data-dir="right"><div className="content__img-inner" style={{ backgroundImage: 'url(/media/7.jpg)' }}></div></div>
-                            <div className="content__img pos-8" data-dir="bottom"><div className="content__img-inner" style={{ backgroundImage: 'url(/media/8.jpg)' }}></div></div>
-                            <div className="content__img pos-9" data-dir="left"><div className="content__img-inner" style={{ backgroundImage: 'url(/media/9.jpg)' }}></div></div>
+                            <LazyContentImage src="/media/7.jpg" className="pos-7" dataDir="right" isActive={isContentActive('content-3')} />
+                            <LazyContentImage src="/media/8.jpg" className="pos-8" dataDir="bottom" isActive={isContentActive('content-3')} />
+                            <LazyContentImage src="/media/9.jpg" className="pos-9" dataDir="left" isActive={isContentActive('content-3')} />
                         </div>
                         <div className="content" id="content-4" data-bg="bg-4">
                             <h2 className="content__title">Metamorph</h2>
-                            <div className="content__img pos-10" data-dir="left"><div className="content__img-inner" style={{ backgroundImage: 'url(/media/10.jpg)' }}></div></div>
-                            <div className="content__img pos-11" data-dir="right"><div className="content__img-inner" style={{ backgroundImage: 'url(/media/11.jpg)' }}></div></div>
-                            <div className="content__img pos-12" data-dir="right"><div className="content__img-inner" style={{ backgroundImage: 'url(/media/12.jpg)' }}></div></div>
+                            <LazyContentImage src="/media/10.jpg" className="pos-10" dataDir="left" isActive={isContentActive('content-4')} />
+                            <LazyContentImage src="/media/11.jpg" className="pos-11" dataDir="right" isActive={isContentActive('content-4')} />
+                            <LazyContentImage src="/media/12.jpg" className="pos-12" dataDir="right" isActive={isContentActive('content-4')} />
                         </div>
                         <div className="content" id="content-5" data-bg="bg-5">
                             <h2 className="content__title">Prismatics</h2>
-                            <div className="content__img pos-13" data-dir="right"><div className="content__img-inner" style={{ backgroundImage: 'url(/media/13.jpg)' }}></div></div>
-                            <div className="content__img pos-14" data-dir="bottom"><div className="content__img-inner" style={{ backgroundImage: 'url(/media/14.jpg)' }}></div></div>
-                            <div className="content__img pos-15" data-dir="right"><div className="content__img-inner" style={{ backgroundImage: 'url(/media/15.jpg)' }}></div></div>
+                            <LazyContentImage src="/media/13.jpg" className="pos-13" dataDir="right" isActive={isContentActive('content-5')} />
+                            <LazyContentImage src="/media/14.jpg" className="pos-14" dataDir="bottom" isActive={isContentActive('content-5')} />
+                            <LazyContentImage src="/media/15.jpg" className="pos-15" dataDir="right" isActive={isContentActive('content-5')} />
                         </div>
                     </div>
                 </div>
             </main>
             <div className="background">
-                <div id="bg-1" className="background__image" style={{ backgroundImage: 'url(/media/beige1.jpg)' }}></div>
-                <div id="bg-2" className="background__image" style={{ backgroundImage: 'url(/media/red1.jpg)' }}></div>
-                <div id="bg-3" className="background__image" style={{ backgroundImage: 'url(/media/pink.jpg)' }}></div>
-                <div id="bg-4" className="background__image" style={{ backgroundImage: 'url(/media/beige2.jpg)' }}></div>
-                <div id="bg-5" className="background__image" style={{ backgroundImage: 'url(/media/red2.jpg)' }}></div>
-                <img
-                    className="background__base"
-                    src="/defimgbg.jpg"
-                    alt="Background"
-                    style={{ zIndex: -1 }}
+                {bgData.map((bg, index) => (
+                    <LazyBgImage 
+                        key={bg.id}
+                        id={bg.id}
+                        src={bg.src}
+                        isActive={isContentActive(`content-${index + 1}`)}
+                    />
+                ))}
+                <div 
+                    className="background__video"
+                    style={{ 
+                        zIndex: -1,
+                        backgroundImage: 'url(/v1img.jpg)',
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center',
+                    }}
                 />
             </div>
         </div>

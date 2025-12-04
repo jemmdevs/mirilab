@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Inter, Playfair_Display } from "next/font/google";
+import { Geist, Geist_Mono, Inter, Playfair_Display, Onest } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/app/components/Navbar";
 import CustomCursor from "@/app/components/CustomCursor";
@@ -7,21 +7,31 @@ import CustomCursor from "@/app/components/CustomCursor";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+  display: "swap",
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  display: "swap",
 });
 
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
+  display: "swap",
 });
 
 const playfair = Playfair_Display({
   variable: "--font-playfair",
   subsets: ["latin"],
+  display: "swap",
+});
+
+const onest = Onest({
+  variable: "--font-onest",
+  subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -36,12 +46,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        {/* Preload critical assets for better LCP */}
+        <link rel="preload" href="/v1img.jpg" as="image" fetchPriority="high" />
+      </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} ${playfair.variable} antialiased bg-black text-white`}
+        className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} ${playfair.variable} ${onest.variable} antialiased bg-black text-white`}
       >
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=swap" rel="stylesheet" />
         <CustomCursor />
         <Navbar />
         {children}
