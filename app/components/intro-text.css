@@ -1,0 +1,38 @@
+/* Intro text styles */
+.frame__intro {
+    display: none;
+}
+
+@media screen and (min-width: 53em) {
+    .frame__intro {
+        display: flex;
+        gap: 1.5rem;
+        position: fixed;
+        right: 15vw;
+        top: 30vh;
+        max-width: 280px;
+        font-size: 13px;
+        line-height: 1.5;
+        font-weight: 350;
+        color: #fff;
+        z-index: 100;
+        align-items: flex-start;
+        pointer-events: none;
+        text-transform: none;
+        font-family: var(--font-inter), sans-serif;
+    }
+
+    .frame__intro-dot {
+        width: 6px;
+        height: 6px;
+        background-color: #fff;
+        border-radius: 50%;
+        margin-top: 7px;
+        flex-shrink: 0;
+    }
+
+    .frame__intro p {
+        margin: 0;
+        opacity: 0.9;
+    }
+}

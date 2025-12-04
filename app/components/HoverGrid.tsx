@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import './hover-grid.css';
+import './intro-text.css';
 
 // Content data for lazy loading management
 const contentData = [
@@ -22,13 +23,13 @@ const bgData = [
 ];
 
 // Lazy image component that only loads when activated
-function LazyBgImage({ 
-    id, 
-    src, 
-    isActive 
-}: { 
-    id: string; 
-    src: string; 
+function LazyBgImage({
+    id,
+    src,
+    isActive
+}: {
+    id: string;
+    src: string;
     isActive: boolean;
 }) {
     const [loaded, setLoaded] = useState(false);
@@ -49,10 +50,10 @@ function LazyBgImage({
     }, [shouldLoad, src, loaded]);
 
     return (
-        <div 
+        <div
             id={id}
             className="background__image"
-            style={{ 
+            style={{
                 backgroundImage: loaded ? `url(${src})` : 'none',
             }}
         />
@@ -90,8 +91,8 @@ function LazyContentImage({
 
     return (
         <div className={`content__img ${className}`} data-dir={dataDir}>
-            <div 
-                className="content__img-inner" 
+            <div
+                className="content__img-inner"
                 style={{ backgroundImage: loaded ? `url(${src})` : 'none' }}
             />
         </div>
@@ -120,6 +121,7 @@ export default function HoverGrid() {
         const workNav = container.querySelector('.frame__works');
         const workLinks = Array.from(workNav?.querySelectorAll('a') || []);
         const title = container.querySelector('.frame__title-main');
+        const intro = container.querySelector('.frame__intro');
         const video = container.querySelector('.background__video');
 
         if (!workNav || workLinks.length === 0) return;
@@ -153,7 +155,7 @@ export default function HoverGrid() {
             if (!href) return;
 
             const contentId = href.replace('#', '');
-            
+
             // Update active content for lazy loading
             if (isShowing) {
                 setActiveContent(contentId);
@@ -300,10 +302,10 @@ export default function HoverGrid() {
             };
         });
 
-        // Fades out the video/title when hovering over the navigation
+        // Fades out the video/title/intro when hovering over the navigation
         const handleNavMouseEnter = () => {
-            gsap.killTweensOf([video, title]);
-            gsap.to([video, title], {
+            gsap.killTweensOf([video, title, intro]);
+            gsap.to([video, title, intro], {
                 duration: 0.6,
                 ease: 'power4',
                 opacity: 0
@@ -311,8 +313,8 @@ export default function HoverGrid() {
         };
 
         const handleNavMouseLeave = () => {
-            gsap.killTweensOf([video, title]);
-            gsap.to([video, title], {
+            gsap.killTweensOf([video, title, intro]);
+            gsap.to([video, title, intro], {
                 duration: 0.6,
                 ease: 'sine.in',
                 opacity: 1
@@ -332,7 +334,7 @@ export default function HoverGrid() {
         };
     }, []);
 
-    const isContentActive = (contentId: string) => 
+    const isContentActive = (contentId: string) =>
         activeContent === contentId || preloadedSections.has(contentId);
 
     return (
@@ -347,6 +349,10 @@ export default function HoverGrid() {
                         <a href="#content-4">Metamorph</a>
                         <a href="#content-5">Prismatics</a>
                     </nav>
+
+                    <div className="frame__intro">
+                        <p>Since 2024, I´ve been doing good shit.</p>
+                    </div>
 
                     <h2 className="frame__title-main"><span>I make</span> <span>Interfaces</span></h2>
                     <div className="frame__content">
@@ -385,16 +391,16 @@ export default function HoverGrid() {
             </main>
             <div className="background">
                 {bgData.map((bg, index) => (
-                    <LazyBgImage 
+                    <LazyBgImage
                         key={bg.id}
                         id={bg.id}
                         src={bg.src}
                         isActive={isContentActive(`content-${index + 1}`)}
                     />
                 ))}
-                <div 
+                <div
                     className="background__video"
-                    style={{ 
+                    style={{
                         zIndex: -1,
                         backgroundImage: 'url(/v1img.jpg)',
                         backgroundSize: 'cover',
