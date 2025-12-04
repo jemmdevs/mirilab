@@ -276,7 +276,7 @@ export default function HoverGrid() {
                 <div id="bg-5" className="background__image" style={{ backgroundImage: 'url(/media/red2.jpg)' }}></div>
                 <img
                     className="background__base"
-                    src="/imgbg.jpeg"
+                    src="/defimgbg.jpg"
                     alt="Background"
                     style={{ zIndex: -1 }}
                 />
