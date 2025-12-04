@@ -282,7 +282,7 @@ export default function HoverGrid() {
                     playsInline
                     style={{ zIndex: -1 }}
                 >
-                    <source src="/bg-video.mp4" type="video/mp4" />
+                    <source src="/bgvideoHD.webm" type="video/webm" />
                 </video>
             </div>
         </div>
