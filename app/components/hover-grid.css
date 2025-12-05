@@ -11,6 +11,7 @@
 	--color-link: #777674;
 	--color-link-hover: #f4d88c;
 	--page-padding: 1.5rem;
+	--page-side-padding: 1rem;
 	--color-link-works: #fff;
 	--color-link-works-hover: #f4d88c;
 	--color-link-works-current: #eeae30;
@@ -114,7 +115,7 @@
 }
 
 .frame {
-	padding: var(--page-padding);
+	padding: var(--page-padding) var(--page-side-padding) var(--page-side-padding);
 	position: relative;
 	min-height: 100vh;
 	display: grid;
@@ -183,7 +184,7 @@
 	/* Small visual gap between items */
 	pointer-events: auto;
 	position: fixed;
-	left: 2.5rem;
+	left: var(--page-side-padding);
 	top: 50%;
 	transform: translateY(-50%);
 	z-index: 1500;
@@ -402,64 +403,19 @@
 	contain-intrinsic-size: 300px 200px;
 }
 
-.pos-1 {
-	grid-area: 1 / 1 / 5 / 5;
+/* Standardized positions */
+.pos-right {
+	grid-area: 6 / 8 / 11 / 11;
 }
 
-.pos-2 {
-	grid-area: 5 / 8 / 10 / 11;
+.pos-left {
+	grid-area: 6 / 3 / 11 / 7;
+	transform: translate3d(-4vw, -5vh, 0);
 }
 
-.pos-3 {
-	grid-area: 8 / 3 / 11 / 5;
-}
-
-.pos-4 {
-	grid-area: 3 / 5 / 8 / 10;
-}
-
-.pos-5 {
-	grid-area: 7 / 4 / 10 / 7;
-}
-
-.pos-6 {
-	grid-area: 2 / 2 / 4 / 4;
-}
-
-.pos-7 {
-	grid-area: 8 / 2 / 11 / 5;
-}
-
-.pos-8 {
-	grid-area: 2 / 8 / 8 / 11;
-}
-
-.pos-9 {
-	grid-area: 3 / 3 / 6 / 6;
-}
-
-.pos-10 {
-	grid-area: 7 / 7 / 10 / 9;
-}
-
-.pos-11 {
-	grid-area: 4 / 1 / 10 / 4;
-}
-
-.pos-12 {
-	grid-area: 2 / 5 / 6 / 9;
-}
-
-.pos-13 {
-	grid-area: 3 / 8 / 8 / 11;
-}
-
-.pos-14 {
-	grid-area: 1 / 5 / 5 / 7;
-}
-
-.pos-15 {
-	grid-area: 6 / 2 / 11 / 5;
+.pos-top {
+	grid-area: 2 / 6 / 7 / 10;
+	transform: translate3d(5vw, 0, 0);
 }
 
 .background {
@@ -509,6 +465,7 @@
 @media screen and (min-width: 53em) {
 	.hover-grid-container {
 		--page-padding: 2.5rem;
+		--page-side-padding: 1.5rem;
 	}
 
 	.frame {
@@ -539,13 +496,18 @@
 	.frame__title-main {
 		grid-area: 5 / 3 / 2 / 6;
 	}
+
+	.frame__content {
+		grid-column: 1 / -1;
+		grid-row: 1 / -1;
+	}
 }
 
 /* Mobile styles for frame__works */
 @media screen and (max-width: 52.99em) {
 	.frame__works {
 		position: fixed;
-		left: 1.5rem;
+		left: var(--page-side-padding);
 		top: 50%;
 		transform: translateY(-50%);
 	}

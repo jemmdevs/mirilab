@@ -43,7 +43,7 @@ export default function Navbar() {
     }, []);
 
     return (
-        <nav className="fixed top-0 left-0 w-full flex justify-between items-center px-8 py-4 z-[2000] text-white pointer-events-none" style={{ fontFamily: 'Inter, sans-serif' }}>
+        <nav className="fixed top-0 left-0 w-full flex justify-between items-center px-6 py-4 z-[2000] text-white pointer-events-none" style={{ fontFamily: 'Inter, sans-serif' }}>
             {/* Left: Menu Button */}
             <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -77,7 +77,7 @@ export default function Navbar() {
             {/* Right: Time & Contact */}
             <div className="flex items-center gap-6 pointer-events-auto">
                 {/* Rotating City & Time */}
-                <div 
+                <div
                     className="flex items-center gap-1.5 min-w-[115px] justify-end"
                     style={{ fontSize: '12px', fontWeight: 350, lineHeight: '14px' }}
                 >
@@ -96,7 +96,7 @@ export default function Navbar() {
                             </motion.span>
                         </AnimatePresence>
                     </div>
-                    
+
                     {/* Time */}
                     <div className="relative overflow-hidden h-[14px]">
                         <AnimatePresence mode="wait">

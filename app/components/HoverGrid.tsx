@@ -358,33 +358,28 @@ export default function HoverGrid() {
                     <div className="frame__content">
                         <div className="content" id="content-1" data-bg="bg-1">
                             <h2 className="content__title">Herex Aether</h2>
-                            <LazyContentImage src="/media/1.jpg" className="pos-1" dataDir="right" isActive={isContentActive('content-1')} />
-                            <LazyContentImage src="/media/2.jpg" className="pos-2" dataDir="left" isActive={isContentActive('content-1')} />
-                            <LazyContentImage src="/media/3.jpg" className="pos-3" dataDir="top" isActive={isContentActive('content-1')} />
+                            <LazyContentImage src="/media/1.jpg" className="pos-right" dataDir="right" isActive={isContentActive('content-1')} />
+
                         </div>
                         <div className="content" id="content-2" data-bg="bg-2">
                             <h2 className="content__title">Cosmics</h2>
-                            <LazyContentImage src="/media/4.jpg" className="pos-4" dataDir="bottom" isActive={isContentActive('content-2')} />
-                            <LazyContentImage src="/media/5.jpg" className="pos-5" dataDir="right" isActive={isContentActive('content-2')} />
-                            <LazyContentImage src="/media/6.jpg" className="pos-6" dataDir="right" isActive={isContentActive('content-2')} />
+                            <LazyContentImage src="/media/4.jpg" className="pos-left" dataDir="left" isActive={isContentActive('content-2')} />
+
                         </div>
                         <div className="content" id="content-3" data-bg="bg-3">
                             <h2 className="content__title">Mystic Trails</h2>
-                            <LazyContentImage src="/media/7.jpg" className="pos-7" dataDir="right" isActive={isContentActive('content-3')} />
-                            <LazyContentImage src="/media/8.jpg" className="pos-8" dataDir="bottom" isActive={isContentActive('content-3')} />
-                            <LazyContentImage src="/media/9.jpg" className="pos-9" dataDir="left" isActive={isContentActive('content-3')} />
+                            <LazyContentImage src="/media/7.jpg" className="pos-right" dataDir="right" isActive={isContentActive('content-3')} />
+
                         </div>
                         <div className="content" id="content-4" data-bg="bg-4">
                             <h2 className="content__title">Metamorph</h2>
-                            <LazyContentImage src="/media/10.jpg" className="pos-10" dataDir="left" isActive={isContentActive('content-4')} />
-                            <LazyContentImage src="/media/11.jpg" className="pos-11" dataDir="right" isActive={isContentActive('content-4')} />
-                            <LazyContentImage src="/media/12.jpg" className="pos-12" dataDir="right" isActive={isContentActive('content-4')} />
+                            <LazyContentImage src="/media/10.jpg" className="pos-left" dataDir="left" isActive={isContentActive('content-4')} />
+
                         </div>
                         <div className="content" id="content-5" data-bg="bg-5">
                             <h2 className="content__title">Prismatics</h2>
-                            <LazyContentImage src="/media/13.jpg" className="pos-13" dataDir="right" isActive={isContentActive('content-5')} />
-                            <LazyContentImage src="/media/14.jpg" className="pos-14" dataDir="bottom" isActive={isContentActive('content-5')} />
-                            <LazyContentImage src="/media/15.jpg" className="pos-15" dataDir="right" isActive={isContentActive('content-5')} />
+                            <LazyContentImage src="/media/13.jpg" className="pos-top" dataDir="right" isActive={isContentActive('content-5')} />
+
                         </div>
                     </div>
                 </div>

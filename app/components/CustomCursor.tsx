@@ -72,8 +72,8 @@ export default function CustomCursor() {
                     cy="20"
                     r="18"
                     fill="none"
-                    stroke="#4F46E5" // Indigo-600, looks like a nice dark blue/purple
-                    strokeWidth="1.5"
+                    stroke="#362bffff" // Indigo-600, looks like a nice dark blue/purple
+                    strokeWidth="1.0"
                     className={`transition-all duration-300 ease-out origin-center ${isHovering ? 'opacity-100 scale-100' : 'opacity-0 scale-50'}`}
                 />
 
