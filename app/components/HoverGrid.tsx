@@ -174,6 +174,7 @@ export default function HoverGrid() {
 
             // Selecting title and images within the content element
             const contentTitle = contentElement.querySelector('.content__title');
+            const contentTexts = Array.from(contentElement.querySelectorAll('.content__desc'));
             const contentImages = Array.from(contentElement.querySelectorAll('.content__img')) as HTMLElement[];
             const contentInnerImages = Array.from(contentElement.querySelectorAll('.content__img-inner'));
 
@@ -208,6 +209,11 @@ export default function HoverGrid() {
                         { opacity: 0, y: 12 },
                         { opacity: 1, y: 0, duration: 0.95, ease: 'expo.out' },
                         0.05)
+                    // Description paragraphs
+                    .fromTo(contentTexts,
+                        { opacity: 0, y: 20 },
+                        { opacity: 1, y: 0, duration: 0.8, stagger: 0.05, ease: 'power2.out' },
+                        0.1)
                     // Images: separate clip-path animation for smoothness
                     .fromTo(contentImages, {
                         clipPath: (index, target) => getClipPath(target)['from'],
@@ -240,6 +246,7 @@ export default function HoverGrid() {
                 gsap.set(contentElement, { zIndex: 0, opacity: 0 });
                 gsap.set(bgElement, { opacity: 0 });
                 gsap.set(contentTitle, { opacity: 0 });
+                gsap.set(contentTexts, { opacity: 0 });
                 gsap.set(contentImages, { clipPath: (index, target) => getClipPath(target)['from'] });
                 contentElement.classList.remove('content--current');
             }
@@ -356,30 +363,35 @@ export default function HoverGrid() {
 
                     <h2 className="frame__title-main"><span>I make</span> <span>Interfaces</span></h2>
                     <div className="frame__content">
-                        <div className="content" id="content-1" data-bg="bg-1">
-                            <h2 className="content__title">Herex Aether</h2>
+                        <div className="content text-pos-1" id="content-1" data-bg="bg-1">
+                            <h2 className="content__title TitlePos-left">Herex Aether</h2>
+                            <p className="content__desc pos-1">A digital experience that transcends the ordinary boundaries of web design.</p>
+                            <p className="content__desc pos-2">Crafted with precision in 2024, focusing on immersive user interactions.</p>
                             <LazyContentImage src="/media/1.jpg" className="pos-right" dataDir="right" isActive={isContentActive('content-1')} />
-
                         </div>
-                        <div className="content" id="content-2" data-bg="bg-2">
-                            <h2 className="content__title">Cosmics</h2>
+                        <div className="content text-pos-2" id="content-2" data-bg="bg-2">
+                            <h2 className="content__title TitlePos-right">Cosmics</h2>
+                            <p className="content__desc pos-1">Exploring the depths of the universe through visual storytelling.</p>
+                            <p className="content__desc pos-2">Award-winning concept art for the next generation of space exploration.</p>
                             <LazyContentImage src="/media/4.jpg" className="pos-left" dataDir="left" isActive={isContentActive('content-2')} />
-
                         </div>
-                        <div className="content" id="content-3" data-bg="bg-3">
-                            <h2 className="content__title">Mystic Trails</h2>
+                        <div className="content text-pos-1" id="content-3" data-bg="bg-3">
+                            <h2 className="content__title TitlePos-bottom">Mystic Trails</h2>
+                            <p className="content__desc pos-1">Nature photography capturing the unseen beauty of the wild.</p>
+                            <p className="content__desc pos-2">A collection of moments frozen in time, revealing the soul of the forest.</p>
                             <LazyContentImage src="/media/7.jpg" className="pos-right" dataDir="right" isActive={isContentActive('content-3')} />
-
                         </div>
-                        <div className="content" id="content-4" data-bg="bg-4">
-                            <h2 className="content__title">Metamorph</h2>
+                        <div className="content text-pos-2" id="content-4" data-bg="bg-4">
+                            <h2 className="content__title TitlePos-right">Metamorph</h2>
+                            <p className="content__desc pos-1">Procedural generation meeting organic forms in a dance of code.</p>
+                            <p className="content__desc pos-2">Experiments in creative coding that challenge our perception of digital art.</p>
                             <LazyContentImage src="/media/10.jpg" className="pos-left" dataDir="left" isActive={isContentActive('content-4')} />
-
                         </div>
-                        <div className="content" id="content-5" data-bg="bg-5">
-                            <h2 className="content__title">Prismatics</h2>
+                        <div className="content text-pos-3" id="content-5" data-bg="bg-5">
+                            <h2 className="content__title TitlePos-left">Prismatics</h2>
+                            <p className="content__desc pos-1">Refracting light and color to create stunning visual identities.</p>
+                            <p className="content__desc pos-2">Art direction for leading fashion brands, defining the trends of tomorrow.</p>
                             <LazyContentImage src="/media/13.jpg" className="pos-top" dataDir="right" isActive={isContentActive('content-5')} />
-
                         </div>
                     </div>
                 </div>

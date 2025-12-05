@@ -22,14 +22,7 @@
         font-family: var(--font-inter), sans-serif;
     }
 
-    .frame__intro-dot {
-        width: 6px;
-        height: 6px;
-        background-color: #fff;
-        border-radius: 50%;
-        margin-top: 7px;
-        flex-shrink: 0;
-    }
+
 
     .frame__intro p {
         margin: 0;
