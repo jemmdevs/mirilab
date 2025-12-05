@@ -422,7 +422,10 @@
 	contain-intrinsic-size: 300px 200px;
 }
 
-.content__desc {
+
+
+.content__desc1,
+.content__desc2 {
 	position: relative;
 	z-index: 10;
 	margin: 0;
@@ -437,39 +440,40 @@
 	font-family: var(--font-inter), sans-serif;
 }
 
-/* Variant 1: Left Side (Top & Bottom) - Use with Right Image */
-.text-pos-1 .content__desc.pos-1 {
-	grid-area: 8 / 2 / 10 / 5;
-	align-self: end;
-}
-
-.text-pos-1 .content__desc.pos-2 {
-	grid-area: 2 / 2 / 4 / 5;
+/* Description 1 Positions */
+.desc1Pos-top {
+	grid-area: 2 / 2 / 4 / 6;
 	align-self: start;
+	text-align: left;
 }
 
-/* Variant 2: Right Side (Top & Bottom) - Use with Left Image */
-.text-pos-2 .content__desc.pos-1 {
+.desc1Pos-bottom {
+	grid-area: 8 / 2 / 10 / 6;
+	align-self: end;
+	text-align: left;
+}
+
+.desc1Pos-right {
 	grid-area: 2 / 8 / 4 / 11;
 	align-self: start;
 	text-align: right;
 	justify-self: end;
 }
 
-.text-pos-2 .content__desc.pos-2 {
-	grid-area: 8 / 8 / 10 / 11;
-	align-self: end;
-	text-align: right;
-	justify-self: end;
+/* Description 2 Positions */
+.desc2Pos-top {
+	grid-area: 2 / 2 / 4 / 6;
+	align-self: start;
+	text-align: left;
 }
 
-/* Variant 3: Bottom (Left & Right) - Use with Top Image */
-.text-pos-3 .content__desc.pos-1 {
-	grid-area: 8 / 2 / 10 / 5;
+.desc2Pos-bottom {
+	grid-area: 8 / 2 / 10 / 6;
 	align-self: end;
+	text-align: left;
 }
 
-.text-pos-3 .content__desc.pos-2 {
+.desc2Pos-right {
 	grid-area: 8 / 8 / 10 / 11;
 	align-self: end;
 	text-align: right;
