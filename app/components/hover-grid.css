@@ -445,9 +445,11 @@
 
 /* Description 1 Positions */
 .desc1Pos-top {
-	grid-area: 2 / 2 / 4 / 6;
+	grid-area: 2 / 5 / 4 / 9;
 	align-self: start;
 	text-align: left;
+	margin-top: 40px;
+	margin-left: 25px;
 }
 
 .desc1Pos-bottom {
