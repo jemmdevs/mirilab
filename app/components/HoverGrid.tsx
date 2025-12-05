@@ -351,7 +351,7 @@ export default function HoverGrid() {
                 <div className="frame">
                     <nav className="frame__works">
                         <span>Recent works</span>
-                        <a href="#content-1">Herex Aether</a>
+                        <a href="#content-1">Suno</a>
                         <a href="#content-2">Cosmics</a>
                         <a href="#content-3">Mystic Trails</a>
                         <a href="#content-4">Metamorph</a>
@@ -365,9 +365,9 @@ export default function HoverGrid() {
                     <h2 className="frame__title-main"><span>I make</span> <span>Interfaces</span></h2>
                     <div className="frame__content">
                         <div className="content text-pos-1" id="content-1" data-bg="bg-1">
-                            <h2 className="content__title TitlePos-left">Herex Aether</h2>
-                            <p className="content__desc1 desc1Pos-right">A digital experience that transcends the ordinary boundaries of web design.</p>
-                            <p className="content__desc2 desc2Pos-bottom">Crafted with precision in 2024, focusing on immersive user interactions.</p>
+                            <h2 className="content__title TitlePos-left">Suno</h2>
+                            <p className="content__desc1 desc1Pos-top">Democratizing the music creation process with a prompt-to-song platform.</p>
+                            <p className="content__desc2 desc2Pos-right">Product design, Brand, Engineering.</p>
                             <LazyContentImage src="/media/1.jpg" className="pos-right" dataDir="right" isActive={isContentActive('content-1')} />
                         </div>
                         <div className="content text-pos-2" id="content-2" data-bg="bg-2">

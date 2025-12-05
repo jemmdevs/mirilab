@@ -375,7 +375,8 @@
 .TitlePos-left {
 	justify-content: start;
 	text-align: left;
-	grid-area: 1 / 2 / -1 / 9;
+	grid-area: 3 / 3 / -1 / 10;
+	margin-left: -15px;
 }
 
 .TitlePos-right {
@@ -429,15 +430,17 @@
 	position: relative;
 	z-index: 10;
 	margin: 0;
-	font-size: 13px;
-	line-height: 1.5;
+	font-size: 15px;
+	line-height: 1.4;
 	font-weight: 350;
 	color: rgba(255, 255, 255, 0.9);
 	opacity: 0;
 	will-change: opacity, transform;
-	max-width: 280px;
+	max-width: 210px;
 	text-transform: none;
 	font-family: var(--font-inter), sans-serif;
+	text-wrap: pretty;
+	letter-spacing: -0.01em;
 }
 
 /* Description 1 Positions */
@@ -456,7 +459,7 @@
 .desc1Pos-right {
 	grid-area: 2 / 8 / 4 / 11;
 	align-self: start;
-	text-align: right;
+	text-align: left;
 	justify-self: end;
 }
 
@@ -474,10 +477,12 @@
 }
 
 .desc2Pos-right {
-	grid-area: 8 / 8 / 10 / 11;
+	grid-area: 6 / 6 / 8 / 9;
 	align-self: end;
-	text-align: right;
+	text-align: left;
 	justify-self: end;
+	margin-right: 100px;
+	margin-bottom: -39px;
 }
 
 /* Standardized positions */
