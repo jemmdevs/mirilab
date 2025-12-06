@@ -459,6 +459,12 @@
 	text-align: left;
 }
 
+.desc1Pos-left {
+	grid-area: 2 / 2 / 4 / 6;
+	align-self: start;
+	text-align: left;
+}
+
 .desc1Pos-right {
 	grid-area: 10 / 6 / 11 / 10;
 	align-self: start;

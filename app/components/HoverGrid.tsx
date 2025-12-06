@@ -351,10 +351,11 @@ export default function HoverGrid() {
                 <div className="frame">
                     <nav className="frame__works">
                         <span>Recent works</span>
+
                         <a href="#content-1">Suno</a>
                         <a href="#content-2">Uber</a>
-                        <a href="#content-3">Mystic Trails</a>
-                        <a href="#content-4">Metamorph</a>
+                        <a href="#content-3">Ro</a>
+                        <a href="#content-4">Mystic Trails</a>
                         <a href="#content-5">Prismatics</a>
                     </nav>
 
@@ -376,17 +377,17 @@ export default function HoverGrid() {
                             <p className="content__desc2 desc2Pos-top">Product design, Engineering.</p>
                             <LazyContentImage src="/media/4.jpg" className="pos-top" dataDir="left" isActive={isContentActive('content-2')} />
                         </div>
-                        <div className="content text-pos-1" id="content-3" data-bg="bg-3">
+                        <div className="content text-pos-2" id="content-3" data-bg="bg-3">
+                            <h2 className="content__title TitlePos-right">Ro</h2>
+                            <p className="content__desc1 desc1Pos-bottom">Building a goals-based healthcare offering that feels deeply personal.</p>
+                            <p className="content__desc2 desc2Pos-bottom">Product design, Engineering, Brand.</p>
+                            <LazyContentImage src="/media/7.jpg" className="pos-right" dataDir="right" isActive={isContentActive('content-3')} />
+                        </div>
+                        <div className="content text-pos-1" id="content-4" data-bg="bg-4">
                             <h2 className="content__title TitlePos-bottom">Mystic Trails</h2>
                             <p className="content__desc1 desc1Pos-top">Nature photography capturing the unseen beauty of the wild.</p>
                             <p className="content__desc2 desc2Pos-top">Art direction for leading fashion brands, defining the trends of tomorrow.</p>
-                            <LazyContentImage src="/media/7.jpg" className="pos-top" dataDir="right" isActive={isContentActive('content-3')} />
-                        </div>
-                        <div className="content text-pos-2" id="content-4" data-bg="bg-4">
-                            <h2 className="content__title TitlePos-left">Metamorph</h2>
-                            <p className="content__desc1 desc1Pos-right">Transforming ideas into digital reality through code.</p>
-                            <p className="content__desc2 desc2Pos-bottom">Evolution of design systems and interactive components.</p>
-                            <LazyContentImage src="/media/10.jpg" className="pos-right" dataDir="right" isActive={isContentActive('content-4')} />
+                            <LazyContentImage src="/media/10.jpg" className="pos-top" dataDir="right" isActive={isContentActive('content-4')} />
                         </div>
                         <div className="content text-pos-1" id="content-5" data-bg="bg-5">
                             <h2 className="content__title TitlePos-right">Prismatics</h2>
