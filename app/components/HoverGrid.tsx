@@ -379,9 +379,9 @@ export default function HoverGrid() {
                         </div>
                         <div className="content text-pos-2" id="content-3" data-bg="bg-3">
                             <h2 className="content__title TitlePos-right">Ro</h2>
-                            <p className="content__desc1 desc1Pos-bottom">Building a goals-based healthcare offering that feels deeply personal.</p>
+                            <p className="content__desc1 desc1Pos-left">Building a goals-based healthcare offering that feels deeply personal.</p>
                             <p className="content__desc2 desc2Pos-bottom">Product design, Engineering, Brand.</p>
-                            <LazyContentImage src="/media/7.jpg" className="pos-right" dataDir="right" isActive={isContentActive('content-3')} />
+                            <LazyContentImage src="/media/7.jpg" className="pos-left" dataDir="right" isActive={isContentActive('content-3')} />
                         </div>
                         <div className="content text-pos-1" id="content-4" data-bg="bg-4">
                             <h2 className="content__title TitlePos-bottom">Mystic Trails</h2>
