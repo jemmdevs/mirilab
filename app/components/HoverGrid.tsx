@@ -226,7 +226,7 @@ export default function HoverGrid() {
                             each: 0.08,
                             ease: 'power1.in'
                         },
-                        duration: 1.0,
+                        duration: 0.7,
                         ease: 'power3.out' // Smooth deceleration for clip reveal
                     }, 0.08)
                     // Inner images: subtle zoom that follows the clip reveal

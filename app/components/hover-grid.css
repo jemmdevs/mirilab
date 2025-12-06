@@ -200,11 +200,11 @@
 
 .frame__works a {
 	pointer-events: auto;
-	padding: 0.45rem 1rem;
+	padding: 0.35rem 1.15rem;
 	margin: 0;
 	position: relative;
-	font-size: 12px;
-	font-weight: 350;
+	font-size: 14px;
+	font-weight: 400;
 	letter-spacing: 0.01em;
 	text-decoration: none;
 	color: rgba(255, 255, 255, 0.9);
