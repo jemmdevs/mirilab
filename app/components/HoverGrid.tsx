@@ -352,7 +352,7 @@ export default function HoverGrid() {
                     <nav className="frame__works">
                         <span>Recent works</span>
                         <a href="#content-1">Suno</a>
-                        <a href="#content-2">Cosmics</a>
+                        <a href="#content-2">Uber</a>
                         <a href="#content-3">Mystic Trails</a>
                         <a href="#content-4">Metamorph</a>
                         <a href="#content-5">Prismatics</a>
@@ -371,10 +371,10 @@ export default function HoverGrid() {
                             <LazyContentImage src="/media/1.jpg" className="pos-right" dataDir="right" isActive={isContentActive('content-1')} />
                         </div>
                         <div className="content text-pos-2" id="content-2" data-bg="bg-2">
-                            <h2 className="content__title TitlePos-right">Cosmics</h2>
-                            <p className="content__desc1 desc1Pos-top">Exploring the depths of the universe through visual storytelling.</p>
-                            <p className="content__desc2 desc2Pos-bottom">Award-winning concept art for the next generation of space exploration.</p>
-                            <LazyContentImage src="/media/4.jpg" className="pos-left" dataDir="left" isActive={isContentActive('content-2')} />
+                            <h2 className="content__title TitlePos-bottom">Uber</h2>
+                            <p className="content__desc1 desc1Pos-right">A long term partnership spanning  across virtually every product experience.</p>
+                            <p className="content__desc2 desc2Pos-top">Product design, Engineering.</p>
+                            <LazyContentImage src="/media/4.jpg" className="pos-top" dataDir="left" isActive={isContentActive('content-2')} />
                         </div>
                         <div className="content text-pos-1" id="content-3" data-bg="bg-3">
                             <h2 className="content__title TitlePos-bottom">Mystic Trails</h2>

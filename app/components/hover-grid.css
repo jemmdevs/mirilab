@@ -387,8 +387,9 @@
 
 .TitlePos-bottom {
 	align-content: end;
-	grid-area: 1 / 2 / 10 / 10;
+	grid-area: 1 / 4 / 10 / 10;
 	padding-bottom: 2rem;
+	margin-left: 85px;
 }
 
 .no-js .content__title {
@@ -459,17 +460,21 @@
 }
 
 .desc1Pos-right {
-	grid-area: 2 / 8 / 4 / 11;
+	grid-area: 10 / 6 / 11 / 10;
 	align-self: start;
 	text-align: left;
 	justify-self: end;
+	margin-top: -20px;
+
 }
 
 /* Description 2 Positions */
 .desc2Pos-top {
-	grid-area: 2 / 2 / 4 / 6;
+	grid-area: 2 / 4 / 4 / 8;
 	align-self: start;
 	text-align: left;
+	margin-top: 40px;
+	margin-left: -25px;
 }
 
 .desc2Pos-bottom {
