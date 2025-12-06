@@ -380,10 +380,10 @@
 }
 
 .TitlePos-right {
-	justify-content: end;
-	text-align: right;
-	grid-area: 3 / 3 / -1 / 8;
-	left: 60px;
+	justify-content: start;
+	text-align: left;
+	grid-area: 3 / 8 / -1 / 10;
+	left: -25px;
 }
 
 .TitlePos-bottom {

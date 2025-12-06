@@ -356,7 +356,7 @@ export default function HoverGrid() {
                         <a href="#content-2">Uber</a>
                         <a href="#content-3">Ro</a>
                         <a href="#content-4">Mystic Trails</a>
-                        <a href="#content-5">Prismatics</a>
+                        <a href="#content-5">Rapidismo</a>
                     </nav>
 
                     <div className="frame__intro">
@@ -384,15 +384,15 @@ export default function HoverGrid() {
                             <LazyContentImage src="/media/7.jpg" className="pos-left" dataDir="top" isActive={isContentActive('content-3')} />
                         </div>
                         <div className="content text-pos-1" id="content-4" data-bg="bg-4">
-                            <h2 className="content__title TitlePos-bottom">Mystic Trails</h2>
+                            <h2 className="content__title TitlePos-left">Mystic Trails</h2>
                             <p className="content__desc1 desc1Pos-top">Nature photography capturing the unseen beauty of the wild.</p>
-                            <p className="content__desc2 desc2Pos-top">Art direction for leading fashion brands, defining the trends of tomorrow.</p>
-                            <LazyContentImage src="/media/10.jpg" className="pos-top" dataDir="right" isActive={isContentActive('content-4')} />
+                            <p className="content__desc2 desc2Pos-right">Art direction for leading fashion brands, defining the trends of tomorrow.</p>
+                            <LazyContentImage src="/media/10.jpg" className="pos-right" dataDir="right" isActive={isContentActive('content-4')} />
                         </div>
                         <div className="content text-pos-1" id="content-5" data-bg="bg-5">
-                            <h2 className="content__title TitlePos-right">Prismatics</h2>
-                            <p className="content__desc1 desc1Pos-top">Refracting user attention into meaningful engagement.</p>
-                            <p className="content__desc2 desc2Pos-top">A spectrum of possibilities in every digital interaction.</p>
+                            <h2 className="content__title TitlePos-right">Rapidismo</h2>
+                            <p className="content__desc1 desc1Pos-left">Refracting user attention into meaningful engagement.</p>
+                            <p className="content__desc2 desc2Pos-bottom">A spectrum of possibilities in every digital interaction.</p>
                             <LazyContentImage src="/media/13.jpg" className="pos-left" dataDir="left" isActive={isContentActive('content-5')} />
                         </div>
                     </div>
