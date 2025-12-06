@@ -369,7 +369,7 @@ export default function HoverGrid() {
                             <h2 className="content__title TitlePos-left">Suno</h2>
                             <p className="content__desc1 desc1Pos-top">Democratizing the music creation process with a prompt-to-song platform.</p>
                             <p className="content__desc2 desc2Pos-right">Product design, Brand, Engineering.</p>
-                            <LazyContentImage src="/media/1.jpg" className="pos-right" dataDir="right" isActive={isContentActive('content-1')} />
+                            <LazyContentImage src="/media/1.jpg" className="pos-right" dataDir="top" isActive={isContentActive('content-1')} />
                         </div>
                         <div className="content text-pos-2" id="content-2" data-bg="bg-2">
                             <h2 className="content__title TitlePos-bottom">Uber</h2>
@@ -381,7 +381,7 @@ export default function HoverGrid() {
                             <h2 className="content__title TitlePos-right">Ro</h2>
                             <p className="content__desc1 desc1Pos-left">Building a goals-based healthcare offering that feels deeply personal.</p>
                             <p className="content__desc2 desc2Pos-bottom">Product design, Engineering, Brand.</p>
-                            <LazyContentImage src="/media/7.jpg" className="pos-left" dataDir="right" isActive={isContentActive('content-3')} />
+                            <LazyContentImage src="/media/7.jpg" className="pos-left" dataDir="top" isActive={isContentActive('content-3')} />
                         </div>
                         <div className="content text-pos-1" id="content-4" data-bg="bg-4">
                             <h2 className="content__title TitlePos-bottom">Mystic Trails</h2>

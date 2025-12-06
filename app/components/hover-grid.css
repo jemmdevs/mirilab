@@ -402,7 +402,7 @@
 	will-change: clip-path, opacity;
 	backface-visibility: hidden;
 	transform: translateZ(0);
-	border-radius: 4px;
+	border-radius: 7px;
 	overflow: hidden;
 	/* GPU acceleration for smoother clip-path */
 	contain: layout paint;
@@ -504,17 +504,22 @@
 
 /* Standardized positions */
 .pos-right {
-	grid-area: 6 / 8 / 11 / 11;
+	grid-area: 5 / 8 / 11 / 11;
+	margin-left: 60px;
 }
 
 .pos-left {
 	grid-area: 6 / 3 / 11 / 7;
 	transform: translate3d(-4vw, -5vh, 0);
+	margin-right: 120px;
+	margin-top: -40px;
 }
 
 .pos-top {
 	grid-area: 2 / 6 / 7 / 10;
 	transform: translate3d(5vw, 0, 0);
+	margin-bottom: 50px;
+	margin-left: -40px;
 }
 
 .background {
