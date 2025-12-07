@@ -183,15 +183,19 @@ export default function HoverGrid() {
             const currentItems = scrollContainer.querySelectorAll('.mobile-work-item');
             if (currentItems[currentActiveIndex]) {
                 const item = currentItems[currentActiveIndex] as HTMLElement;
-                const containerHeight = scrollContainer.clientHeight;
-                const itemHeight = item.offsetHeight;
-                const targetScroll = item.offsetTop - (containerHeight / 2) + (itemHeight / 2);
+                const itemRect = item.getBoundingClientRect();
+                const screenCenter = window.innerHeight / 2;
+                const itemCenter = itemRect.top + itemRect.height / 2;
+                const offset = itemCenter - screenCenter;
                 
-                gsap.to(scrollContainer, {
-                    scrollTop: targetScroll,
-                    duration: 0.3,
-                    ease: 'power2.out'
-                });
+                // Solo hacer snap si el offset es significativo (más de 5px)
+                if (Math.abs(offset) > 5) {
+                    gsap.to(scrollContainer, {
+                        scrollTop: scrollContainer.scrollTop + offset,
+                        duration: 0.3,
+                        ease: 'power2.out'
+                    });
+                }
             }
         };
 
