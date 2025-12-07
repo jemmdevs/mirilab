@@ -179,35 +179,9 @@ export default function HoverGrid() {
             setShowEndPhrase(isNearEnd);
         };
 
-        const snapToItem = () => {
-            const currentItems = scrollContainer.querySelectorAll('.mobile-work-item');
-            if (currentItems[currentActiveIndex]) {
-                const item = currentItems[currentActiveIndex] as HTMLElement;
-                const itemRect = item.getBoundingClientRect();
-                const screenCenter = window.innerHeight / 2;
-                const itemCenter = itemRect.top + itemRect.height / 2;
-                const offset = itemCenter - screenCenter;
-                
-                // Solo hacer snap si el offset es significativo (más de 5px)
-                if (Math.abs(offset) > 5) {
-                    gsap.to(scrollContainer, {
-                        scrollTop: scrollContainer.scrollTop + offset,
-                        duration: 0.3,
-                        ease: 'power2.out'
-                    });
-                }
-            }
-        };
-
         // Use native scroll - much smoother on mobile
         const handleScroll = () => {
             updateActiveItem();
-            
-            // Debounce snap - wait for scroll to stop
-            if (snapTimeout) {
-                clearTimeout(snapTimeout);
-            }
-            snapTimeout = setTimeout(snapToItem, 150);
         };
 
         scrollContainer.addEventListener('scroll', handleScroll, { passive: true });
@@ -489,7 +463,7 @@ export default function HoverGrid() {
                     {/* Mobile scroll picker */}
                     {isMobile && (
                         <>
-                            <div 
+                            <div
                                 ref={mobileScrollRef}
                                 className="mobile-scroll-picker"
                             >
@@ -514,7 +488,7 @@ export default function HoverGrid() {
                         <p>Since 2024, I´ve been doing good shit.</p>
                     </div>
 
-                    <h2 
+                    <h2
                         ref={isMobile ? mobileTitleRef : null}
                         className="frame__title-main"
                         style={isMobile ? { opacity: titleOpacity, transition: 'opacity 0.15s ease-out' } : undefined}
