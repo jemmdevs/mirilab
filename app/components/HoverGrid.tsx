@@ -14,6 +14,20 @@ const contentData = [
     { id: 'content-5', bg: 'bg-5', images: ['/media/13.jpg', '/media/14.jpg', '/media/15.jpg'] },
 ];
 
+// Work items data for mobile scroll picker
+const workItems = [
+    { id: 'content-1', name: 'Suno' },
+    { id: 'content-2', name: 'Uber' },
+    { id: 'content-3', name: 'Ro' },
+    { id: 'content-4', name: 'Mystic Trails' },
+    { id: 'content-5', name: 'Rapidismo' },
+    { id: 'content-6', name: 'Doka' },
+    { id: 'content-7', name: 'Senri' },
+    { id: 'content-8', name: 'Mirilab' },
+    { id: 'content-9', name: 'Tousys' },
+    { id: 'content-10', name: 'Alawal' },
+];
+
 const bgData = [
     { id: 'bg-1', src: '/media/beige1.jpg' },
     { id: 'bg-2', src: '/media/red1.jpg' },
@@ -101,8 +115,123 @@ function LazyContentImage({
 
 export default function HoverGrid() {
     const containerRef = useRef<HTMLDivElement>(null);
+    const mobileScrollRef = useRef<HTMLDivElement>(null);
+    const mobileTitleRef = useRef<HTMLHeadingElement>(null);
     const [activeContent, setActiveContent] = useState<string | null>(null);
     const [preloadedSections, setPreloadedSections] = useState<Set<string>>(new Set());
+    const [isMobile, setIsMobile] = useState(false);
+    const [activeWorkIndex, setActiveWorkIndex] = useState(0);
+    const [titleOpacity, setTitleOpacity] = useState(1);
+    const [showEndPhrase, setShowEndPhrase] = useState(false);
+
+    // Detect mobile
+    useEffect(() => {
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth <= 768);
+        };
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
+
+    // Mobile scroll picker logic
+    useEffect(() => {
+        if (!isMobile || !mobileScrollRef.current) return;
+
+        const scrollContainer = mobileScrollRef.current;
+        const items = scrollContainer.querySelectorAll('.mobile-work-item');
+        if (items.length === 0) return;
+
+        const updateActiveItem = () => {
+            // Use the actual screen center (50% of viewport height)
+            const screenCenter = window.innerHeight / 2;
+
+            let closestIndex = 0;
+            let closestDistance = Infinity;
+
+            items.forEach((item, index) => {
+                const itemRect = item.getBoundingClientRect();
+                const itemCenter = itemRect.top + itemRect.height / 2;
+                const distance = Math.abs(screenCenter - itemCenter);
+
+                if (distance < closestDistance) {
+                    closestDistance = distance;
+                    closestIndex = index;
+                }
+            });
+
+            setActiveWorkIndex(closestIndex);
+
+            // Calculate title opacity based on scroll position
+            // The more we scroll, the more the title fades
+            const scrollTop = scrollContainer.scrollTop;
+            const maxScroll = 150; // Fade completely after 150px of scroll
+            const opacity = Math.max(0, 1 - (scrollTop / maxScroll));
+            setTitleOpacity(opacity);
+
+            // Show end phrase when near the last item (last 2 items)
+            const totalItems = items.length;
+            const isNearEnd = closestIndex >= totalItems - 2;
+            setShowEndPhrase(isNearEnd);
+        };
+
+        // Touch/drag scroll handling
+        let startY = 0;
+        let startScrollTop = 0;
+        let isDragging = false;
+
+        const handleTouchStart = (e: TouchEvent) => {
+            isDragging = true;
+            startY = e.touches[0].clientY;
+            startScrollTop = scrollContainer.scrollTop;
+        };
+
+        const handleTouchMove = (e: TouchEvent) => {
+            if (!isDragging) return;
+            e.preventDefault();
+            const deltaY = startY - e.touches[0].clientY;
+            scrollContainer.scrollTop = startScrollTop + deltaY;
+            updateActiveItem();
+        };
+
+        const handleTouchEnd = () => {
+            isDragging = false;
+            // Snap to nearest item
+            const items = scrollContainer.querySelectorAll('.mobile-work-item');
+            if (items[activeWorkIndex]) {
+                const item = items[activeWorkIndex] as HTMLElement;
+                const containerHeight = scrollContainer.clientHeight;
+                const itemHeight = item.offsetHeight;
+                const targetScroll = item.offsetTop - (containerHeight / 2) + (itemHeight / 2);
+                
+                gsap.to(scrollContainer, {
+                    scrollTop: targetScroll,
+                    duration: 0.3,
+                    ease: 'power2.out'
+                });
+            }
+        };
+
+        // Also handle scroll event for wheel/trackpad
+        const handleScroll = () => {
+            updateActiveItem();
+        };
+
+        scrollContainer.addEventListener('touchstart', handleTouchStart, { passive: false });
+        scrollContainer.addEventListener('touchmove', handleTouchMove, { passive: false });
+        scrollContainer.addEventListener('touchend', handleTouchEnd);
+        scrollContainer.addEventListener('scroll', handleScroll);
+
+        // Initial update
+        updateActiveItem();
+
+        return () => {
+            scrollContainer.removeEventListener('touchstart', handleTouchStart);
+            scrollContainer.removeEventListener('touchmove', handleTouchMove);
+            scrollContainer.removeEventListener('touchend', handleTouchEnd);
+            scrollContainer.removeEventListener('scroll', handleScroll);
+        };
+    }, [isMobile, activeWorkIndex]);
 
     // Preload first section after mount for better UX
     useEffect(() => {
@@ -113,7 +242,8 @@ export default function HoverGrid() {
     }, []);
 
     useEffect(() => {
-        if (!containerRef.current) return;
+        // Desktop hover effects only - skip on mobile
+        if (!containerRef.current || isMobile) return;
 
         const container = containerRef.current;
 
@@ -340,7 +470,7 @@ export default function HoverGrid() {
             workNav.removeEventListener('mouseenter', handleNavMouseEnter);
             workNav.removeEventListener('mouseleave', handleNavMouseLeave);
         };
-    }, []);
+    }, [isMobile]);
 
     const isContentActive = (contentId: string) =>
         activeContent === contentId || preloadedSections.has(contentId);
@@ -349,21 +479,58 @@ export default function HoverGrid() {
         <div className="hover-grid-container" ref={containerRef}>
             <main>
                 <div className="frame">
-                    <nav className="frame__works">
-                        <span>Recent works</span>
+                    {/* Desktop navigation */}
+                    {!isMobile && (
+                        <nav className="frame__works">
+                            <span>Recent works</span>
+                            <a href="#content-1">Suno</a>
+                            <a href="#content-2">Uber</a>
+                            <a href="#content-3">Ro</a>
+                            <a href="#content-4">Mystic Trails</a>
+                            <a href="#content-5">Rapidismo</a>
+                            <a href="#content-6">Doka</a>
+                            <a href="#content-7">Senri</a>
+                            <a href="#content-8">Mirilab</a>
+                            <a href="#content-9">Tousys</a>
+                            <a href="#content-10">Alawal</a>
+                        </nav>
+                    )}
 
-                        <a href="#content-1">Suno</a>
-                        <a href="#content-2">Uber</a>
-                        <a href="#content-3">Ro</a>
-                        <a href="#content-4">Mystic Trails</a>
-                        <a href="#content-5">Rapidismo</a>
-                    </nav>
+                    {/* Mobile scroll picker */}
+                    {isMobile && (
+                        <>
+                            <div 
+                                ref={mobileScrollRef}
+                                className="mobile-scroll-picker"
+                            >
+                                <div className="mobile-scroll-spacer" />
+                                {workItems.map((item, index) => (
+                                    <div
+                                        key={item.id}
+                                        className={`mobile-work-item ${index === activeWorkIndex ? 'active' : 'inactive'}`}
+                                    >
+                                        {item.name}
+                                    </div>
+                                ))}
+                                <div className="mobile-scroll-spacer" />
+                            </div>
+                            <div className={`mobile-end-phrase ${showEndPhrase ? 'visible' : ''}`}>
+                                Since 2024, I´ve been making good shit.
+                            </div>
+                        </>
+                    )}
 
                     <div className="frame__intro">
                         <p>Since 2024, I´ve been doing good shit.</p>
                     </div>
 
-                    <h2 className="frame__title-main"><span>I make</span> <span>Interfaces</span></h2>
+                    <h2 
+                        ref={isMobile ? mobileTitleRef : null}
+                        className="frame__title-main"
+                        style={isMobile ? { opacity: titleOpacity, transition: 'opacity 0.15s ease-out' } : undefined}
+                    >
+                        <span>I make</span> <span>Interfaces</span>
+                    </h2>
                     <div className="frame__content">
                         <div className="content text-pos-1" id="content-1" data-bg="bg-1">
                             <h2 className="content__title TitlePos-left">Suno</h2>
@@ -390,10 +557,40 @@ export default function HoverGrid() {
                             <LazyContentImage src="/media/10.jpg" className="pos-right" dataDir="right" isActive={isContentActive('content-4')} />
                         </div>
                         <div className="content text-pos-1" id="content-5" data-bg="bg-5">
-                            <h2 className="content__title TitlePos-right">Rapidismo</h2>
-                            <p className="content__desc1 desc1Pos-left">Refracting user attention into meaningful engagement.</p>
-                            <p className="content__desc2 desc2Pos-bottom">A spectrum of possibilities in every digital interaction.</p>
-                            <LazyContentImage src="/media/13.jpg" className="pos-left" dataDir="left" isActive={isContentActive('content-5')} />
+                            <h2 className="content__title TitlePos-bottom">Rapidismo</h2>
+                            <p className="content__desc1 desc1Pos-right">Refracting user attention into meaningful engagement.</p>
+                            <p className="content__desc2 desc2Pos-top">A spectrum of possibilities in every digital interaction.</p>
+                            <LazyContentImage src="/media/13.jpg" className="pos-top" dataDir="left" isActive={isContentActive('content-5')} />
+                        </div>
+                        <div className="content text-pos-2" id="content-6" data-bg="bg-3">
+                            <h2 className="content__title TitlePos-right">Doka</h2>
+                            <p className="content__desc1 desc1Pos-left">Building a goals-based healthcare offering that feels deeply personal.</p>
+                            <p className="content__desc2 desc2Pos-bottom">Product design, Engineering, Brand.</p>
+                            <LazyContentImage src="/media/7.jpg" className="pos-left" dataDir="top" isActive={isContentActive('content-6')} />
+                        </div>
+                        <div className="content text-pos-1" id="content-7" data-bg="bg-4">
+                            <h2 className="content__title TitlePos-left">Senri</h2>
+                            <p className="content__desc1 desc1Pos-top">Nature photography capturing the unseen beauty of the wild.</p>
+                            <p className="content__desc2 desc2Pos-right">Art direction for leading fashion brands, defining the trends of tomorrow.</p>
+                            <LazyContentImage src="/media/10.jpg" className="pos-right" dataDir="right" isActive={isContentActive('content-7')} />
+                        </div>
+                        <div className="content text-pos-1" id="content-8" data-bg="bg-5">
+                            <h2 className="content__title TitlePos-bottom">Mirilab</h2>
+                            <p className="content__desc1 desc1Pos-right">Refracting user attention into meaningful engagement.</p>
+                            <p className="content__desc2 desc2Pos-top">A spectrum of possibilities in every digital interaction.</p>
+                            <LazyContentImage src="/media/13.jpg" className="pos-top" dataDir="left" isActive={isContentActive('content-8')} />
+                        </div>
+                        <div className="content text-pos-2" id="content-9" data-bg="bg-3">
+                            <h2 className="content__title TitlePos-right">Tousys</h2>
+                            <p className="content__desc1 desc1Pos-left">Building a goals-based healthcare offering that feels deeply personal.</p>
+                            <p className="content__desc2 desc2Pos-bottom">Product design, Engineering, Brand.</p>
+                            <LazyContentImage src="/media/7.jpg" className="pos-left" dataDir="top" isActive={isContentActive('content-9')} />
+                        </div>
+                        <div className="content text-pos-1" id="content-10" data-bg="bg-4">
+                            <h2 className="content__title TitlePos-left">Alawal</h2>
+                            <p className="content__desc1 desc1Pos-top">Nature photography capturing the unseen beauty of the wild.</p>
+                            <p className="content__desc2 desc2Pos-right">Art direction for leading fashion brands, defining the trends of tomorrow.</p>
+                            <LazyContentImage src="/media/10.jpg" className="pos-right" dataDir="right" isActive={isContentActive('content-10')} />
                         </div>
                     </div>
                 </div>

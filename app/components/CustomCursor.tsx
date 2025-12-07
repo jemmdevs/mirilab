@@ -7,8 +7,24 @@ export default function CustomCursor() {
     const cursorRef = useRef<HTMLDivElement>(null);
     const [isHovering, setIsHovering] = useState(false);
     const [isClicking, setIsClicking] = useState(false);
+    const [isMobile, setIsMobile] = useState(false);
+
+    // Detect mobile/touch devices
+    useEffect(() => {
+        const checkMobile = () => {
+            const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+            const isSmallScreen = window.innerWidth <= 768;
+            setIsMobile(isTouchDevice || isSmallScreen);
+        };
+
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
 
     useEffect(() => {
+        if (isMobile) return; // Don't set up cursor on mobile
+
         const cursor = cursorRef.current;
         if (!cursor) return;
 
@@ -51,7 +67,10 @@ export default function CustomCursor() {
             window.removeEventListener('mousedown', handleMouseDown);
             window.removeEventListener('mouseup', handleMouseUp);
         };
-    }, []);
+    }, [isMobile]);
+
+    // Don't render cursor on mobile
+    if (isMobile) return null;
 
     return (
         <div

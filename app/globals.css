@@ -115,7 +115,13 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
-    cursor: none !important;
+  }
+
+  /* Hide native cursor only on desktop */
+  @media (min-width: 769px) {
+    * {
+      cursor: none !important;
+    }
   }
 
   body {
