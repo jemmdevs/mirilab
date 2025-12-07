@@ -127,7 +127,7 @@ export default function Navbar() {
                     </div>
 
                     {/* Icon Container */}
-                    <div className="absolute inset-0 flex items-center justify-center md:inset-y-0 md:right-0 md:w-[24px]">
+                    <div className="absolute inset-0 md:inset-auto md:inset-y-0 md:right-0 md:w-[24px] flex items-center justify-center">
                         <svg
                             viewBox="0 0 10 8"
                             fill="none"
