@@ -142,6 +142,9 @@ export default function HoverGrid() {
         const items = scrollContainer.querySelectorAll('.mobile-work-item');
         if (items.length === 0) return;
 
+        let snapTimeout: NodeJS.Timeout | null = null;
+        let currentActiveIndex = 0;
+
         const updateActiveItem = () => {
             // Use the actual screen center (50% of viewport height)
             const screenCenter = window.innerHeight / 2;
@@ -160,6 +163,7 @@ export default function HoverGrid() {
                 }
             });
 
+            currentActiveIndex = closestIndex;
             setActiveWorkIndex(closestIndex);
 
             // Calculate title opacity based on scroll position
@@ -175,31 +179,10 @@ export default function HoverGrid() {
             setShowEndPhrase(isNearEnd);
         };
 
-        // Touch/drag scroll handling
-        let startY = 0;
-        let startScrollTop = 0;
-        let isDragging = false;
-
-        const handleTouchStart = (e: TouchEvent) => {
-            isDragging = true;
-            startY = e.touches[0].clientY;
-            startScrollTop = scrollContainer.scrollTop;
-        };
-
-        const handleTouchMove = (e: TouchEvent) => {
-            if (!isDragging) return;
-            e.preventDefault();
-            const deltaY = startY - e.touches[0].clientY;
-            scrollContainer.scrollTop = startScrollTop + deltaY;
-            updateActiveItem();
-        };
-
-        const handleTouchEnd = () => {
-            isDragging = false;
-            // Snap to nearest item
-            const items = scrollContainer.querySelectorAll('.mobile-work-item');
-            if (items[activeWorkIndex]) {
-                const item = items[activeWorkIndex] as HTMLElement;
+        const snapToItem = () => {
+            const currentItems = scrollContainer.querySelectorAll('.mobile-work-item');
+            if (currentItems[currentActiveIndex]) {
+                const item = currentItems[currentActiveIndex] as HTMLElement;
                 const containerHeight = scrollContainer.clientHeight;
                 const itemHeight = item.offsetHeight;
                 const targetScroll = item.offsetTop - (containerHeight / 2) + (itemHeight / 2);
@@ -212,26 +195,29 @@ export default function HoverGrid() {
             }
         };
 
-        // Also handle scroll event for wheel/trackpad
+        // Use native scroll - much smoother on mobile
         const handleScroll = () => {
             updateActiveItem();
+            
+            // Debounce snap - wait for scroll to stop
+            if (snapTimeout) {
+                clearTimeout(snapTimeout);
+            }
+            snapTimeout = setTimeout(snapToItem, 150);
         };
 
-        scrollContainer.addEventListener('touchstart', handleTouchStart, { passive: false });
-        scrollContainer.addEventListener('touchmove', handleTouchMove, { passive: false });
-        scrollContainer.addEventListener('touchend', handleTouchEnd);
-        scrollContainer.addEventListener('scroll', handleScroll);
+        scrollContainer.addEventListener('scroll', handleScroll, { passive: true });
 
         // Initial update
         updateActiveItem();
 
         return () => {
-            scrollContainer.removeEventListener('touchstart', handleTouchStart);
-            scrollContainer.removeEventListener('touchmove', handleTouchMove);
-            scrollContainer.removeEventListener('touchend', handleTouchEnd);
             scrollContainer.removeEventListener('scroll', handleScroll);
+            if (snapTimeout) {
+                clearTimeout(snapTimeout);
+            }
         };
-    }, [isMobile, activeWorkIndex]);
+    }, [isMobile]);
 
     // Preload first section after mount for better UX
     useEffect(() => {
