@@ -612,7 +612,7 @@
 @media screen and (max-width: 768px) {
 	.frame {
 		position: relative;
-		padding: 155px var(--page-side-padding) var(--page-side-padding);
+		padding: 165px var(--page-side-padding) var(--page-side-padding);
 		display: flex;
 		flex-direction: column;
 		align-items: flex-start;
