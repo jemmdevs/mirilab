@@ -117,12 +117,12 @@ export default function HoverGrid() {
     const containerRef = useRef<HTMLDivElement>(null);
     const mobileScrollRef = useRef<HTMLDivElement>(null);
     const mobileTitleRef = useRef<HTMLHeadingElement>(null);
+    const mobileEndPhraseRef = useRef<HTMLDivElement>(null);
     const [activeContent, setActiveContent] = useState<string | null>(null);
     const [preloadedSections, setPreloadedSections] = useState<Set<string>>(new Set());
     const [isMobile, setIsMobile] = useState(false);
     const [activeWorkIndex, setActiveWorkIndex] = useState(0);
     const [titleOpacity, setTitleOpacity] = useState(1);
-    const [showEndPhrase, setShowEndPhrase] = useState(false);
 
     // Detect mobile
     useEffect(() => {
@@ -163,8 +163,17 @@ export default function HoverGrid() {
                 }
             });
 
-            currentActiveIndex = closestIndex;
-            setActiveWorkIndex(closestIndex);
+            // Only act if closest distance is within a threshold
+            // This allows the initial state to have no selection if the list is offset
+            const selectionThreshold = 25;
+
+            if (closestDistance < selectionThreshold) {
+                currentActiveIndex = closestIndex;
+                setActiveWorkIndex(closestIndex);
+            } else {
+                currentActiveIndex = -1;
+                setActiveWorkIndex(-1);
+            }
 
             // Calculate title opacity based on scroll position
             // The more we scroll, the more the title fades
@@ -173,10 +182,25 @@ export default function HoverGrid() {
             const opacity = Math.max(0, 1 - (scrollTop / maxScroll));
             setTitleOpacity(opacity);
 
-            // Show end phrase when near the last item (last 2 items)
-            const totalItems = items.length;
-            const isNearEnd = closestIndex >= totalItems - 2;
-            setShowEndPhrase(isNearEnd);
+            // End phrase scroll-linked animation
+            if (mobileEndPhraseRef.current) {
+                // We want it to appear when we are near the bottom
+                // The "bottom" is defined by scrollHeight - clientHeight
+                const maxScrollHeight = scrollContainer.scrollHeight - scrollContainer.clientHeight;
+                const distToBottom = maxScrollHeight - scrollTop;
+
+                // Show over the last 80px (approx 2-3 items before end)
+                const fadeRange = 80;
+                // Calculate opacity: 0 when far, 1 when at bottom
+                // Clamp between 0 and 1
+                const phraseOpacity = Math.max(0, Math.min(1, 1 - (distToBottom / fadeRange)));
+
+                // Also slight translate for effect
+                const translate = 15 * (1 - phraseOpacity); // Move up 15px as it fades in
+
+                mobileEndPhraseRef.current.style.opacity = phraseOpacity.toString();
+                mobileEndPhraseRef.current.style.transform = `translateY(${translate}px)`;
+            }
         };
 
         // Use native scroll - much smoother on mobile
@@ -478,7 +502,10 @@ export default function HoverGrid() {
                                 ))}
                                 <div className="mobile-scroll-spacer" />
                             </div>
-                            <div className={`mobile-end-phrase ${showEndPhrase ? 'visible' : ''}`}>
+                            <div
+                                ref={mobileEndPhraseRef}
+                                className="mobile-end-phrase"
+                            >
                                 Since 2024, I´ve been making good shit.
                             </div>
                         </>
