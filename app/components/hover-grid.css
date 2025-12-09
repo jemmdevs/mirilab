@@ -727,6 +727,10 @@
 
 	.mobile-scroll-spacer {
 		flex-shrink: 0;
+		height: 50vh;
+	}
+
+	.mobile-scroll-spacer:first-child {
 		height: 53vh;
 	}
 
