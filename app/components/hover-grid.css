@@ -766,7 +766,7 @@
 	/* End phrase that appears near the last item */
 	.mobile-end-phrase {
 		position: fixed;
-		bottom: 5%;
+		bottom: 7%;
 		left: var(--page-side-padding);
 		right: var(--page-side-padding);
 		text-align: left;
