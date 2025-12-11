@@ -189,8 +189,8 @@ export default function HoverGrid() {
                 const maxScrollHeight = scrollContainer.scrollHeight - scrollContainer.clientHeight;
                 const distToBottom = maxScrollHeight - scrollTop;
 
-                // Show over the last 80px (approx 2-3 items before end)
-                const fadeRange = 80;
+                // Show over the last 60px (approx 2 items before end)
+                const fadeRange = 60;
                 // Calculate opacity: 0 when far, 1 when at bottom
                 // Clamp between 0 and 1
                 const phraseOpacity = Math.max(0, Math.min(1, 1 - (distToBottom / fadeRange)));
