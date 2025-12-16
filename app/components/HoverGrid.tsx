@@ -192,7 +192,7 @@ export default function HoverGrid() {
                 // Show over the last 60px (approx 2 items before end)
                 const fadeRange = 60;
                 // Calculate opacity: 0 when far, 1 when at bottom
-                // Clamp between 0 and 1
+                // Clamp between 0 and 1 for better opacity
                 const phraseOpacity = Math.max(0, Math.min(1, 1 - (distToBottom / fadeRange)));
 
                 // Also slight translate for effect
