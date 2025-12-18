@@ -182,24 +182,31 @@ export default function HoverGrid() {
             const opacity = Math.max(0, 1 - (scrollTop / maxScroll));
             setTitleOpacity(opacity);
 
-            // End phrase scroll-linked animation
+            // End phrase scroll-linked animation - Apple-style
             if (mobileEndPhraseRef.current) {
                 // We want it to appear when we are near the bottom
                 // The "bottom" is defined by scrollHeight - clientHeight
                 const maxScrollHeight = scrollContainer.scrollHeight - scrollContainer.clientHeight;
                 const distToBottom = maxScrollHeight - scrollTop;
 
-                // Show over the last 60px (approx 2 items before end)
-                const fadeRange = 60;
-                // Calculate opacity: 0 when far, 1 when at bottom
-                // Clamp between 0 and 1 
-                const phraseOpacity = Math.max(0, Math.min(1, 1 - (distToBottom / fadeRange)));
+                // Show over the last 80px for smoother Apple-like reveal
+                const fadeRange = 80;
+                // Calculate progress: 0 when far, 1 when at bottom
+                const progress = Math.max(0, Math.min(1, 1 - (distToBottom / fadeRange)));
 
-                // Also slight translate for effect
-                const translate = 15 * (1 - phraseOpacity); // Move up 15px as it fades in
+                // Apple-style easing: ease-out cubic for smoother deceleration
+                const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
+                const easedProgress = easeOutCubic(progress);
 
-                mobileEndPhraseRef.current.style.opacity = phraseOpacity.toString();
-                mobileEndPhraseRef.current.style.transform = `translateY(${translate}px)`;
+                // Apple-style animation values
+                const opacity = easedProgress;
+                const translateY = 12 * (1 - easedProgress); // Subtle 12px movement
+                const scale = 0.97 + (0.03 * easedProgress); // Scale from 0.97 to 1
+                const blur = 8 * (1 - easedProgress); // Blur from 8px to 0
+
+                mobileEndPhraseRef.current.style.opacity = opacity.toString();
+                mobileEndPhraseRef.current.style.transform = `translateY(${translateY}px) scale(${scale})`;
+                mobileEndPhraseRef.current.style.filter = `blur(${blur}px)`;
             }
         };
 
@@ -444,7 +451,7 @@ export default function HoverGrid() {
                         }
                         hideTimer = null;
                     }, HIDE_DELAY);
-                    
+
                     // Also fade in video/title/intro with delay
                     fadeInVideoTitleIntro();
                 }

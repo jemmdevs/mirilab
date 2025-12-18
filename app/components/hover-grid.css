@@ -763,7 +763,7 @@
 		opacity: 0.4;
 	}
 
-	/* End phrase that appears near the last item */
+	/* End phrase that appears near the last item - Apple-style animation */
 	.mobile-end-phrase {
 		position: fixed;
 		bottom: 7%;
@@ -772,16 +772,13 @@
 		text-align: left;
 		font-size: 14px;
 		font-weight: 350;
-		color: rgba(255, 255, 255, 0.7);
-		opacity: 0;
-		transform: translateY(8px);
+		letter-spacing: -0.01em;
+		color: rgba(255, 255, 255, 0.85);
 		pointer-events: none;
 		z-index: 60;
-		will-change: opacity, transform;
-	}
-
-	.mobile-end-phrase.visible {
-		opacity: 1;
-		transform: translateY(0);
+		/* Apple-style: GPU-accelerated properties */
+		will-change: opacity, transform, filter;
+		backface-visibility: hidden;
+		-webkit-backface-visibility: hidden;
 	}
 }
