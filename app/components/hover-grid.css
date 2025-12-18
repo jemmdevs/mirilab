@@ -221,12 +221,12 @@
 	transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Extended hover area - overlaps to cover gaps completely */
+/* Extended hover area - only covers vertical gaps between items */
 .frame__works a::before {
 	content: '';
 	position: absolute;
-	left: -0.5rem;
-	right: -0.5rem;
+	left: 0;
+	right: 0;
 	top: -0.25rem;
 	/* Extends into the gap above */
 	bottom: -0.25rem;

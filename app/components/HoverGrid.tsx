@@ -378,7 +378,35 @@ export default function HoverGrid() {
         // Shared state for coordinating hover transitions between links
         let activeLink: HTMLAnchorElement | null = null;
         let hideTimer: NodeJS.Timeout | null = null;
+        let videoFadeTimer: NodeJS.Timeout | null = null;
         const HIDE_DELAY = 80; // ms to wait before hiding, allows smooth transition between links
+
+        // Fade video/title/intro - called when hovering links, not the container
+        const fadeOutVideoTitleIntro = () => {
+            if (videoFadeTimer) {
+                clearTimeout(videoFadeTimer);
+                videoFadeTimer = null;
+            }
+            gsap.killTweensOf([video, title, intro]);
+            gsap.to([video, title, intro], {
+                duration: 0.6,
+                ease: 'power4',
+                opacity: 0
+            });
+        };
+
+        const fadeInVideoTitleIntro = () => {
+            // Delay the fade in to allow smooth transition between links
+            videoFadeTimer = setTimeout(() => {
+                gsap.killTweensOf([video, title, intro]);
+                gsap.to([video, title, intro], {
+                    duration: 0.6,
+                    ease: 'sine.in',
+                    opacity: 1
+                });
+                videoFadeTimer = null;
+            }, HIDE_DELAY);
+        };
 
         // Initialize hover effects
         workLinks.forEach(workLink => {
@@ -396,9 +424,10 @@ export default function HoverGrid() {
                     hideWork({ target: activeLink } as unknown as MouseEvent);
                 }
 
-                // Show the new content
+                // Show the new content and fade out video/title/intro
                 activeLink = target;
                 showWork(event as MouseEvent);
+                fadeOutVideoTitleIntro();
             };
 
             const handleMouseLeave = (event: Event) => {
@@ -415,6 +444,9 @@ export default function HoverGrid() {
                         }
                         hideTimer = null;
                     }, HIDE_DELAY);
+                    
+                    // Also fade in video/title/intro with delay
+                    fadeInVideoTitleIntro();
                 }
             };
 
@@ -428,35 +460,14 @@ export default function HoverGrid() {
             };
         });
 
-        // Fades out the video/title/intro when hovering over the navigation
-        const handleNavMouseEnter = () => {
-            gsap.killTweensOf([video, title, intro]);
-            gsap.to([video, title, intro], {
-                duration: 0.6,
-                ease: 'power4',
-                opacity: 0
-            });
-        };
-
-        const handleNavMouseLeave = () => {
-            gsap.killTweensOf([video, title, intro]);
-            gsap.to([video, title, intro], {
-                duration: 0.6,
-                ease: 'sine.in',
-                opacity: 1
-            });
-        };
-
-        workNav.addEventListener('mouseenter', handleNavMouseEnter);
-        workNav.addEventListener('mouseleave', handleNavMouseLeave);
-
         return () => {
             // Cleanup
             workLinks.forEach(link => {
                 if ((link as any)._cleanup) (link as any)._cleanup();
             });
-            workNav.removeEventListener('mouseenter', handleNavMouseEnter);
-            workNav.removeEventListener('mouseleave', handleNavMouseLeave);
+            if (videoFadeTimer) {
+                clearTimeout(videoFadeTimer);
+            }
         };
     }, [isMobile]);
 
