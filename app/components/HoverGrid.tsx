@@ -16,16 +16,16 @@ const contentData = [
 
 // Work items data for mobile scroll picker
 const workItems = [
-    { id: 'content-1', name: 'Suno' },
-    { id: 'content-2', name: 'Uber' },
-    { id: 'content-3', name: 'Ro' },
-    { id: 'content-4', name: 'Mystic Trails' },
-    { id: 'content-5', name: 'Rapidismo' },
-    { id: 'content-6', name: 'Doka' },
-    { id: 'content-7', name: 'Senri' },
-    { id: 'content-8', name: 'Mirilab' },
-    { id: 'content-9', name: 'Tousys' },
-    { id: 'content-10', name: 'Alawal' },
+    { id: 'content-1', name: 'Alawal' },
+    { id: 'content-2', name: 'Tousys' },
+    { id: 'content-3', name: 'Aisac' },
+    { id: 'content-4', name: 'Ikra' },
+    { id: 'content-5', name: 'Doka' },
+    { id: 'content-6', name: 'CasesST' },
+    { id: 'content-7', name: 'NewFake' },
+    { id: 'content-8', name: 'Makora' },
+    { id: 'content-9', name: 'Josen' },
+    { id: 'content-10', name: 'All Projects' },
 ];
 
 const bgData = [
@@ -489,16 +489,16 @@ export default function HoverGrid() {
                     {!isMobile && (
                         <nav className="frame__works">
                             <span>Recent works</span>
-                            <a href="#content-1">Suno</a>
-                            <a href="#content-2">Uber</a>
-                            <a href="#content-3">Ro</a>
-                            <a href="#content-4">Mystic Trails</a>
-                            <a href="#content-5">Rapidismo</a>
-                            <a href="#content-6">Doka</a>
-                            <a href="#content-7">Senri</a>
-                            <a href="#content-8">Mirilab</a>
-                            <a href="#content-9">Tousys</a>
-                            <a href="#content-10">Alawal</a>
+                            <a href="#content-1">Alawal</a>
+                            <a href="#content-2">Tousys</a>
+                            <a href="#content-3">Aisac</a>
+                            <a href="#content-4">Ikra</a>
+                            <a href="#content-5">Doka</a>
+                            <a href="#content-6">CasesST</a>
+                            <a href="#content-7">NewFake</a>
+                            <a href="#content-8">Makora</a>
+                            <a href="#content-9">Josen</a>
+                            <a href="#content-10">All Projects</a>
                         </nav>
                     )}
 
@@ -542,61 +542,61 @@ export default function HoverGrid() {
                     </h2>
                     <div className="frame__content">
                         <div className="content text-pos-1" id="content-1" data-bg="bg-1">
-                            <h2 className="content__title TitlePos-left">Suno</h2>
+                            <h2 className="content__title TitlePos-left">Alawal</h2>
                             <p className="content__desc1 desc1Pos-top">Democratizing the music creation process with a prompt-to-song platform.</p>
                             <p className="content__desc2 desc2Pos-right">Product design, Brand, Engineering.</p>
                             <LazyContentImage src="/media/1.jpg" className="pos-right" dataDir="top" isActive={isContentActive('content-1')} />
                         </div>
                         <div className="content text-pos-2" id="content-2" data-bg="bg-2">
-                            <h2 className="content__title TitlePos-bottom">Uber</h2>
+                            <h2 className="content__title TitlePos-bottom">Tousys</h2>
                             <p className="content__desc1 desc1Pos-right">A long term partnership spanning  across virtually every product experience.</p>
                             <p className="content__desc2 desc2Pos-top">Product design, Engineering.</p>
                             <LazyContentImage src="/media/4.jpg" className="pos-top" dataDir="left" isActive={isContentActive('content-2')} />
                         </div>
                         <div className="content text-pos-2" id="content-3" data-bg="bg-3">
-                            <h2 className="content__title TitlePos-right">Ro</h2>
+                            <h2 className="content__title TitlePos-right">Aisac</h2>
                             <p className="content__desc1 desc1Pos-left">Building a goals-based healthcare offering that feels deeply personal.</p>
                             <p className="content__desc2 desc2Pos-bottom">Product design, Engineering, Brand.</p>
                             <LazyContentImage src="/media/7.jpg" className="pos-left" dataDir="top" isActive={isContentActive('content-3')} />
                         </div>
                         <div className="content text-pos-1" id="content-4" data-bg="bg-4">
-                            <h2 className="content__title TitlePos-left">Mystic Trails</h2>
+                            <h2 className="content__title TitlePos-left">Ikra</h2>
                             <p className="content__desc1 desc1Pos-top">Nature photography capturing the unseen beauty of the wild.</p>
                             <p className="content__desc2 desc2Pos-right">Art direction for leading fashion brands, defining the trends of tomorrow.</p>
                             <LazyContentImage src="/media/10.jpg" className="pos-right" dataDir="right" isActive={isContentActive('content-4')} />
                         </div>
                         <div className="content text-pos-1" id="content-5" data-bg="bg-5">
-                            <h2 className="content__title TitlePos-bottom">Rapidismo</h2>
+                            <h2 className="content__title TitlePos-bottom">Doka</h2>
                             <p className="content__desc1 desc1Pos-right">Refracting user attention into meaningful engagement.</p>
                             <p className="content__desc2 desc2Pos-top">A spectrum of possibilities in every digital interaction.</p>
                             <LazyContentImage src="/media/13.jpg" className="pos-top" dataDir="left" isActive={isContentActive('content-5')} />
                         </div>
                         <div className="content text-pos-2" id="content-6" data-bg="bg-3">
-                            <h2 className="content__title TitlePos-right">Doka</h2>
+                            <h2 className="content__title TitlePos-right">CasesST</h2>
                             <p className="content__desc1 desc1Pos-left">Building a goals-based healthcare offering that feels deeply personal.</p>
                             <p className="content__desc2 desc2Pos-bottom">Product design, Engineering, Brand.</p>
                             <LazyContentImage src="/media/7.jpg" className="pos-left" dataDir="top" isActive={isContentActive('content-6')} />
                         </div>
                         <div className="content text-pos-1" id="content-7" data-bg="bg-4">
-                            <h2 className="content__title TitlePos-left">Senri</h2>
+                            <h2 className="content__title TitlePos-left">NewFake</h2>
                             <p className="content__desc1 desc1Pos-top">Nature photography capturing the unseen beauty of the wild.</p>
                             <p className="content__desc2 desc2Pos-right">Art direction for leading fashion brands, defining the trends of tomorrow.</p>
                             <LazyContentImage src="/media/10.jpg" className="pos-right" dataDir="right" isActive={isContentActive('content-7')} />
                         </div>
                         <div className="content text-pos-1" id="content-8" data-bg="bg-5">
-                            <h2 className="content__title TitlePos-bottom">Mirilab</h2>
+                            <h2 className="content__title TitlePos-bottom">Makora</h2>
                             <p className="content__desc1 desc1Pos-right">Refracting user attention into meaningful engagement.</p>
                             <p className="content__desc2 desc2Pos-top">A spectrum of possibilities in every digital interaction.</p>
                             <LazyContentImage src="/media/13.jpg" className="pos-top" dataDir="left" isActive={isContentActive('content-8')} />
                         </div>
                         <div className="content text-pos-2" id="content-9" data-bg="bg-3">
-                            <h2 className="content__title TitlePos-right">Tousys</h2>
+                            <h2 className="content__title TitlePos-right">Josen</h2>
                             <p className="content__desc1 desc1Pos-left">Building a goals-based healthcare offering that feels deeply personal.</p>
                             <p className="content__desc2 desc2Pos-bottom">Product design, Engineering, Brand.</p>
                             <LazyContentImage src="/media/7.jpg" className="pos-left" dataDir="top" isActive={isContentActive('content-9')} />
                         </div>
                         <div className="content text-pos-1" id="content-10" data-bg="bg-4">
-                            <h2 className="content__title TitlePos-left">Alawal</h2>
+                            <h2 className="content__title TitlePos-left">All Projects</h2>
                             <p className="content__desc1 desc1Pos-top">Nature photography capturing the unseen beauty of the wild.</p>
                             <p className="content__desc2 desc2Pos-right">Art direction for leading fashion brands, defining the trends of tomorrow.</p>
                             <LazyContentImage src="/media/10.jpg" className="pos-right" dataDir="right" isActive={isContentActive('content-10')} />
