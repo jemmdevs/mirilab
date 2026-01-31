@@ -692,7 +692,7 @@
 		left: var(--page-side-padding);
 		top: 0;
 		width: calc(100% - var(--page-side-padding) * 2);
-		height: 100vh;
+		height: 100dvh;
 		overflow-y: scroll;
 		overflow-x: hidden;
 		display: flex;
@@ -728,15 +728,15 @@
 
 	.mobile-scroll-spacer {
 		flex-shrink: 0;
-		height: 50vh;
+		height: 50dvh;
 	}
 
 	.mobile-scroll-spacer:first-child {
-		height: 53vh;
+		height: 53dvh;
 	}
 
 	.mobile-scroll-spacer:last-child {
-		height: calc(50vh - 20px);
+		height: 50dvh;
 	}
 
 	.mobile-work-item {
