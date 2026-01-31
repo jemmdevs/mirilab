@@ -25,7 +25,7 @@ export default function HoverGrid() {
   // State
   const [activeContent, setActiveContent] = useState<string | null>(null);
   const [preloadedSections, setPreloadedSections] = useState<Set<string>>(new Set());
-  const [activeWorkIndex, setActiveWorkIndex] = useState(0);
+  const [activeWorkIndex, setActiveWorkIndex] = useState(-1);
   const [titleOpacity, setTitleOpacity] = useState(1);
 
   // Custom hooks

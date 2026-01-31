@@ -728,15 +728,18 @@
 
 	.mobile-scroll-spacer {
 		flex-shrink: 0;
+		height: 50vh;
 		height: 50dvh;
 	}
 
 	.mobile-scroll-spacer:first-child {
-		height: 58dvh;
+		height: 70vh;
+		height: 70dvh;
 	}
 
 	.mobile-scroll-spacer:last-child {
-		height: 55dvh;
+		height: 60vh;
+		height: 60dvh;
 	}
 
 	.mobile-work-item {
