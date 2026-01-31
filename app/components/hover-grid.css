@@ -693,6 +693,7 @@
 		top: 0;
 		width: calc(100% - var(--page-side-padding) * 2);
 		height: 100vh;
+		height: 100dvh;
 		overflow-y: scroll;
 		overflow-x: hidden;
 		display: flex;
@@ -703,7 +704,6 @@
 		-ms-overflow-style: none;
 		z-index: 50;
 		touch-action: pan-y;
-		overscroll-behavior: contain;
 		/* Fade effect at top and bottom */
 		-webkit-mask-image: linear-gradient(to bottom,
 				transparent 0%,
@@ -727,11 +727,17 @@
 
 	.mobile-scroll-spacer {
 		flex-shrink: 0;
-		height: 50vh;
+		height: calc(50vh + env(safe-area-inset-bottom, 0px));
 	}
 
 	.mobile-scroll-spacer:first-child {
-		height: 53vh;
+		height: calc(70vh + env(safe-area-inset-top, 0px));
+		min-height: 400px;
+	}
+
+	.mobile-scroll-spacer:last-child {
+		height: calc(60vh + env(safe-area-inset-bottom, 0px));
+		min-height: 350px;
 	}
 
 	.mobile-work-item {
