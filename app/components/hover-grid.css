@@ -727,17 +727,15 @@
 
 	.mobile-scroll-spacer {
 		flex-shrink: 0;
-		height: calc(50vh + env(safe-area-inset-bottom, 0px));
+		height: 50vh;
 	}
 
 	.mobile-scroll-spacer:first-child {
-		height: calc(70vh + env(safe-area-inset-top, 0px));
-		min-height: 400px;
+		height: 54vh;
 	}
 
 	.mobile-scroll-spacer:last-child {
-		height: calc(60vh + env(safe-area-inset-bottom, 0px));
-		min-height: 350px;
+		height: 46vh;
 	}
 
 	.mobile-work-item {
