@@ -704,6 +704,7 @@
 		z-index: 50;
 		touch-action: pan-y;
 		overscroll-behavior: contain;
+		scroll-snap-type: y proximity;
 		/* Fade effect at top and bottom */
 		-webkit-mask-image: linear-gradient(to bottom,
 				transparent 0%,
@@ -734,6 +735,10 @@
 		height: 53vh;
 	}
 
+	.mobile-scroll-spacer:last-child {
+		height: calc(50vh - 20px);
+	}
+
 	.mobile-work-item {
 		flex-shrink: 0;
 		padding: 0.25rem 1rem;
@@ -751,6 +756,7 @@
 		border: 1px solid rgba(255, 255, 255, 0.12);
 		border-radius: 9999px;
 		transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+		scroll-snap-align: center;
 	}
 
 	.mobile-work-item.active {
