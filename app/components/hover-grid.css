@@ -692,6 +692,7 @@
 		left: var(--page-side-padding);
 		top: 0;
 		width: calc(100% - var(--page-side-padding) * 2);
+		height: 100vh;
 		height: 100dvh;
 		overflow-y: scroll;
 		overflow-x: hidden;
@@ -703,8 +704,6 @@
 		-ms-overflow-style: none;
 		z-index: 50;
 		touch-action: pan-y;
-		overscroll-behavior: contain;
-		scroll-snap-type: y proximity;
 		/* Fade effect at top and bottom */
 		-webkit-mask-image: linear-gradient(to bottom,
 				transparent 0%,
@@ -728,18 +727,17 @@
 
 	.mobile-scroll-spacer {
 		flex-shrink: 0;
-		height: 50vh;
-		height: 50dvh;
+		height: calc(50vh + env(safe-area-inset-bottom, 0px));
 	}
 
 	.mobile-scroll-spacer:first-child {
-		height: 70vh;
-		height: 70dvh;
+		height: calc(70vh + env(safe-area-inset-top, 0px));
+		min-height: 400px;
 	}
 
 	.mobile-scroll-spacer:last-child {
-		height: 60vh;
-		height: 60dvh;
+		height: calc(60vh + env(safe-area-inset-bottom, 0px));
+		min-height: 350px;
 	}
 
 	.mobile-work-item {
@@ -759,7 +757,6 @@
 		border: 1px solid rgba(255, 255, 255, 0.12);
 		border-radius: 9999px;
 		transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-		scroll-snap-align: center;
 	}
 
 	.mobile-work-item.active {
