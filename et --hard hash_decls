@@ -1,0 +1,67 @@
+[33m6b60bc3[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m this fucking shit
+[33m739c76d[m testing this
+[33m44ffa21[m pushing 31.1.26
+[33ma801fb1[m testing--2 31.1.26
+[33mec2bdab[m testing 31.1.26
+[33mf69c4d9[m some big code optimization
+[33m85acafa[m changed names of projects v-- 24.1.26
+[33m84ea150[m v-- 18.12.25
+[33ma814534[m hover hitbox enhanced
+[33mf49bf3b[m new next security v-- 16.12.25
+[33m70d77e0[m new security v--
+[33m416a82b[m next security upgrade
+[33mb0312b9[m Fix React Server Components CVE vulnerabilities
+[33m93d9198[m new v--11.12.25
+[33m0893e28[m v--11.12.25
+[33m74140e8[m mobile ui scroll interaction enhanced
+[33mfe706e9[m mobile interaction enhanced
+[33m9c28dcc[m new mobile frame_works length
+[33m4ea9cd1[m v1.08.12
+[33m2e9a1ee[m functional v1.07.12
+[33m6588ccc[m new fixes to the changes implemented in responsive
+[33m71e6a7f[m new changes to mobile responsive navigation
+[33m7fd46ce[m new fix en responsive native scroll
+[33m246720e[m mobile responsive v1.07.12
+[33mc36a37b[m responsive mobile v1.07.12
+[33ma91f72e[m functional v1.06.12
+[33m0c55364[m v1.06.12
+[33me5bfeaa[m minor frame__works changes
+[33m8eb884d[m image position and shape fixed
+[33m5ff0181[m text positioning finished
+[33m2d6382f[m just one position text lacking
+[33mce156b8[m new version of nextjs
+[33m450bcac[m checkpoint 2
+[33m17e6d9f[m checkpoint text position 2
+[33m8e2a9fa[m checkpoint for some positions 1
+[33m538b743[m now only lacking some positions fixes for texts
+[33mde55d9a[m new hover page titles position (not adjusted)
+[33md1c4579[m new position for imgs
+[33m47267c7[m new mini text
+[33mc45d0a0[m new img bg and lcp fixed
+[33m5dc4d32[m background study
+[33m33fa1a7[m new minor changes to chkp
+[33m13456e2[m checkpoint to img bg instead of video
+[33m58d52ec[m playfair display font implemented
+[33m249a5a2[m whole day doing fucking fixes I cant advance shit
+[33m5b0b6ba[m checkpoint after background elimination
+[33m1c54b18[m no react bits component background
+[33mb85f86a[m background adjustment
+[33m2bdb845[m better transitions and hover features
+[33mfda7670[m some fixes to smoothness
+[33m858c24c[m images config
+[33mb9edf0b[m new background component
+[33mbbd2e5b[m custom cursor finished
+[33mebcece5[m new cursor enhanced, not finished tho
+[33mf321a97[m custom cursor creation
+[33meba4ac2[m upload to git functional navbar
+[33m2b21e0d[m functional navbar
+[33m9045f5f[m fixed navbar animation
+[33m6bdc87a[m minor change to navbar email icon
+[33m9da9c9f[m new navbar changes
+[33m825d826[m some navbar config
+[33m46d3aa5[m navbar advances
+[33m7d62d9a[m minor speed animation change
+[33mf295643[m new clip path way
+[33mc6480c7[m animation v1.0
+[33ma5f3992[m first commit
+[33m458f418[m Initial commit from Create Next App

@@ -179,7 +179,7 @@ export const workItems: WorkItem[] = [
   { id: 'content-1', name: 'Alawal' },
   { id: 'content-2', name: 'Tousys' },
   { id: 'content-3', name: 'Aisac' },
-  { id: 'content-4', name: 'Ikra' },
+  { id: 'content-4', name: 'IkraOS' },
   { id: 'content-5', name: 'Doka' },
   { id: 'content-6', name: 'CasesST' },
   { id: 'content-7', name: 'NewFake' },
